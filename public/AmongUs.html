@@ -15,9 +15,10 @@ width: 100%;
 margin: auto;
         }
         .logo-container {
-            width: 200px;
+            width: 100px;
             height: auto;
             margin: auto;
+            margin-bottom: 30px;
         }
         .header {
             display: flex;
@@ -67,6 +68,7 @@ margin: auto;
           
         }
         .info-title {
+            font-size: 20px;
             font-weight: bold;
             color: #333;
             margin-bottom: 5px;
@@ -75,10 +77,10 @@ margin: auto;
             color: #666;
         }
         .counter {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             color: #4CAF50;
-            margin: 10px 0;
+            margin: auto;
         }
         .completion-message {
             font-size: 28px;
@@ -104,18 +106,25 @@ margin: auto;
             opacity: 0;
             pointer-events: none;
         }
+        .floorTitleContainer{
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+      
     </style>
 </head>
 <body>
     <div class="container">
        <div class="logo-header">
         <div class="logo-container">
-                <object id="logo-svg" data="LineLogo.svg" type="image/svg+xml" width="200" height="200">
+                <object id="logo-svg" data="LineLogo.svg" type="image/svg+xml" >
                     <!-- Fallback content -->
-                <img src="LineLogo.svg" alt="Wonder House Coliving" width="200" class="fallback" />
+                <img src="LineLogo.svg" alt="Wonder House Coliving"  class="fallback" />
             </object>
         </div>
     </div>
+   <div class="floorTitleContainer"> <div  id="floor-info">Floor</div></div>
         <div class="map-container">
             <object id="floor-plan" data="GameFloorPlan.svg" type="image/svg+xml" width="90%"></object>
         </div>    
@@ -124,7 +133,7 @@ margin: auto;
             <div class="completion-message" id="completion-message">You have finished your tasks!</div>
            
             <div class="info-section">
-                <div><div class="info-title" id="floor-info">Floor</div>
+                <div>
                 <div class="info-title" id="room-info">Room</div></div>
                 <div class="info-content" id="task-info">-</div>
             </div>
@@ -160,8 +169,8 @@ margin: auto;
                 spots = lines.slice(1) // Skip header
                     .filter(line => line.trim()) // Remove empty lines
                     .map(line => {
-                        const [floor, id,name, descripcion] = line.split(',');
-                        return { floor, id,name, descripcion };
+                        const [floor,floorId, id,name, descripcion] = line.split(',');
+                        return { floor,floorId, id,name, descripcion };
                     });
                 
                 // Select 10 random unique spots
@@ -215,7 +224,7 @@ margin: auto;
             document.getElementById('task-counter').textContent = `Task ${currentSpotIndex + 1}/10`;
             
             // Update info display
-            document.getElementById('floor-info').textContent = currentSpot.floor;
+            document.getElementById('floor-info').textContent = currentSpot.floorId;
             document.getElementById('room-info').textContent = currentSpot.name;
             document.getElementById('task-info').textContent = currentSpot.descripcion;
 
