@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Among Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #floor-plan {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        #spot-info {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .info-section {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .info-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .info-content {
+            color: #666;
+        }
+        .zoom-controls, .spot-controls {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Among Us</h1>
+        <div id="spot-info">
+            <div class="info-section">
+                <div class="info-title">Floor</div>
+                <div class="info-content" id="floor-info">-</div>
+            </div>
+            <div class="info-section">
+                <div class="info-title">Room</div>
+                <div class="info-content" id="room-info">-</div>
+            </div>
+            <div class="info-section">
+                <div class="info-title">Task</div>
+                <div class="info-content" id="task-info">-</div>
+            </div>
+        </div>
+        
+        <div class="controls">
+          
+            <div class="spot-controls">
+                <button onclick="showRandomSpot()">Show Random Spot</button>
+            </div>
+        </div>
+
+        <object id="floor-plan" data="GameFloorPlan.svg" type="image/svg+xml" width="90%"></object>
+    </div>
+
+    <script>
+        const floorPlan = document.getElementById('floor-plan');
+        const spotInfo = document.getElementById('spot-info');
+        let currentScale = 1;
+        let spots = [];
+        let currentSpot = null;
+
+        // Load CSV data
+        fetch('Spots.csv')
+            .then(response => response.text())
+            .then(csvText => {
+                // Parse CSV
+                const lines = csvText.split('\n');
+                spots = lines.slice(1) // Skip header
+                    .filter(line => line.trim()) // Remove empty lines
+                    .map(line => {
+                        const [floor, id, name, descripcion] = line.split(',');
+                        return { floor, id, name, descripcion };
+                    });
+                
+                // Show initial random spot
+                showRandomSpot();
+            })
+            .catch(error => {
+                console.error('Error loading CSV:', error);
+                spotInfo.textContent = 'Error loading spots data';
+            });
+
+        function showRandomSpot() {
+            if (spots.length === 0) return;
+
+            // Get a random spot different from the current one
+            let newSpot;
+            do {
+                newSpot = spots[Math.floor(Math.random() * spots.length)];
+            } while (newSpot === currentSpot && spots.length > 1);
+            
+            currentSpot = newSpot;
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            // Update info display
+            document.getElementById('floor-info').textContent = currentSpot.floor;
+            document.getElementById('room-info').textContent = currentSpot.name;
+            document.getElementById('task-info').textContent = currentSpot.descripcion;
+
+            // Update SVG display
+            const svgDoc = floorPlan.contentDocument;
+            if (!svgDoc) return;
+
+            // First, hide all floors
+            ['Floor0', 'Floor1', 'Floor2'].forEach(floor => {
+                const floorElement = svgDoc.getElementById(floor);
+                if (floorElement) {
+                    floorElement.style.display = 'none';
+                }
+            });
+
+            // Show the selected floor
+            const selectedFloor = svgDoc.getElementById(currentSpot.floor);
+            if (selectedFloor) {
+                selectedFloor.style.display = 'block';
+                
+                // Find all elements with class 'cls-17' (which are the spots) in this floor
+                const spots = selectedFloor.querySelectorAll('.cls-17');
+                spots.forEach(spot => {
+                    spot.style.display = 'none';
+                });
+
+                // Show the selected spot
+                const selectedSpot = selectedFloor.querySelector(`#${currentSpot.id}`);
+                if (selectedSpot) {
+                    selectedSpot.style.display = 'block';
+                }
+            }
+        }
+
+      
+
+        // Initialize when SVG is loaded
+        floorPlan.addEventListener('load', () => {
+            if (currentSpot) {
+                updateDisplay();
+            }
+        });
+    </script>
+</body>
+</html> 
