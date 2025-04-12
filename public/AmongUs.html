@@ -10,13 +10,25 @@
             margin: 20px;
             background-color: #f0f0f0;
         }
+        .logo-header{
+width: 100%;
+margin: auto;
+        }
+        .logo-container {
+            width: 200px;
+            height: auto;
+            margin: auto;
+        }
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         h1 {
             text-align: center;
@@ -47,18 +59,12 @@
             margin: 0 auto;
         }
         #spot-info {
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #f8f8f8;
-            border-radius: 5px;
             text-align: center;
         }
         .info-section {
             margin: 10px 0;
             padding: 10px;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          
         }
         .info-title {
             font-weight: bold;
@@ -68,40 +74,73 @@
         .info-content {
             color: #666;
         }
+        .counter {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 10px 0;
+        }
+        .completion-message {
+            font-size: 28px;
+            font-weight: bold;
+            color: #4CAF50;
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            display: none;
+        }
         .zoom-controls, .spot-controls {
             margin: 10px 0;
             padding: 10px;
             background-color: #f8f8f8;
             border-radius: 5px;
         }
+        .map-container {
+            transition: opacity 0.5s ease;
+        }
+        .map-container.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Among Us</h1>
-        <div id="spot-info">
+       <div class="logo-header">
+        <div class="logo-container">
+                <object id="logo-svg" data="LineLogo.svg" type="image/svg+xml" width="200" height="200">
+                    <!-- Fallback content -->
+                <img src="LineLogo.svg" alt="Wonder House Coliving" width="200" class="fallback" />
+            </object>
+        </div>
+    </div>
+        <div class="map-container">
+            <object id="floor-plan" data="GameFloorPlan.svg" type="image/svg+xml" width="90%"></object>
+        </div>    
+        <div id="spot-info" class="header">
+          
+            <div class="completion-message" id="completion-message">You have finished your tasks!</div>
+           
             <div class="info-section">
-                <div class="info-title">Floor</div>
-                <div class="info-content" id="floor-info">-</div>
-            </div>
-            <div class="info-section">
-                <div class="info-title">Room</div>
-                <div class="info-content" id="room-info">-</div>
-            </div>
-            <div class="info-section">
-                <div class="info-title">Task</div>
+                <div><div class="info-title" id="floor-info">Floor</div>
+                <div class="info-title" id="room-info">Room</div></div>
                 <div class="info-content" id="task-info">-</div>
             </div>
-        </div>
-        
+           
+           
+             
+            
+        </div>       
         <div class="controls">
-          
+            <div class="counter" id="task-counter">Task 1/10</div>
             <div class="spot-controls">
-                <button onclick="showRandomSpot()">Show Random Spot</button>
+                <button onclick="nextTask()">Next Task</button>
             </div>
         </div>
 
-        <object id="floor-plan" data="GameFloorPlan.svg" type="image/svg+xml" width="90%"></object>
+       
     </div>
 
     <script>
@@ -109,7 +148,8 @@
         const spotInfo = document.getElementById('spot-info');
         let currentScale = 1;
         let spots = [];
-        let currentSpot = null;
+        let selectedSpots = [];
+        let currentSpotIndex = 0;
 
         // Load CSV data
         fetch('Spots.csv')
@@ -120,32 +160,60 @@
                 spots = lines.slice(1) // Skip header
                     .filter(line => line.trim()) // Remove empty lines
                     .map(line => {
-                        const [floor, id, name, descripcion] = line.split(',');
-                        return { floor, id, name, descripcion };
+                        const [floor, id,name, descripcion] = line.split(',');
+                        return { floor, id,name, descripcion };
                     });
                 
-                // Show initial random spot
-                showRandomSpot();
+                // Select 10 random unique spots
+                selectRandomSpots();
             })
             .catch(error => {
                 console.error('Error loading CSV:', error);
                 spotInfo.textContent = 'Error loading spots data';
             });
 
-        function showRandomSpot() {
-            if (spots.length === 0) return;
-
-            // Get a random spot different from the current one
-            let newSpot;
-            do {
-                newSpot = spots[Math.floor(Math.random() * spots.length)];
-            } while (newSpot === currentSpot && spots.length > 1);
+        function selectRandomSpots() {
+            // Reset selected spots and index
+            selectedSpots = [];
+            currentSpotIndex = 0;
             
-            currentSpot = newSpot;
-            updateDisplay();
+            // Create a copy of spots array to avoid modifying the original
+            const availableSpots = [...spots];
+            
+            // Select 10 random unique spots
+            while (selectedSpots.length < 10 && availableSpots.length > 0) {
+                const randomIndex = Math.floor(Math.random() * availableSpots.length);
+                selectedSpots.push(availableSpots[randomIndex]);
+                availableSpots.splice(randomIndex, 1);
+            }
+            
+            // Show first spot
+            showCurrentSpot();
+            
+            // Make sure map and controls are visible
+            document.querySelector('.map-container').classList.remove('hidden');
+            document.querySelector('.controls').style.display = 'flex';
+            document.getElementById('completion-message').style.display = 'none';
         }
 
-        function updateDisplay() {
+        function nextTask() {
+            currentSpotIndex = (currentSpotIndex + 1) % selectedSpots.length;
+            showCurrentSpot();
+            
+            // Show completion message and hide map if we've reached the last task
+            if (currentSpotIndex === 0) {
+                document.getElementById('completion-message').style.display = 'block';
+                document.querySelector('.map-container').classList.add('hidden');
+                document.querySelector('.controls').style.display = 'none';
+            }
+        }
+
+        function showCurrentSpot() {
+            const currentSpot = selectedSpots[currentSpotIndex];
+            
+            // Update counter
+            document.getElementById('task-counter').textContent = `Task ${currentSpotIndex + 1}/10`;
+            
             // Update info display
             document.getElementById('floor-info').textContent = currentSpot.floor;
             document.getElementById('room-info').textContent = currentSpot.name;
@@ -182,12 +250,10 @@
             }
         }
 
-      
-
         // Initialize when SVG is loaded
         floorPlan.addEventListener('load', () => {
-            if (currentSpot) {
-                updateDisplay();
+            if (selectedSpots.length > 0) {
+                showCurrentSpot();
             }
         });
     </script>
