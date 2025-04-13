@@ -143,7 +143,7 @@ margin: auto;
             
         </div>       
         <div class="controls">
-            <div class="counter" id="task-counter">Task 1/10</div>
+            <div class="counter" id="task-counter">Task 1/6</div>
             <div class="spot-controls">
                 <button onclick="nextTask()">Next Task</button>
             </div>
@@ -159,6 +159,7 @@ margin: auto;
         let spots = [];
         let selectedSpots = [];
         let currentSpotIndex = 0;
+        let numberOfTasks = 6;
 
         // Load CSV data
         fetch('Spots.csv')
@@ -181,7 +182,7 @@ margin: auto;
                 spotInfo.textContent = 'Error loading spots data';
             });
 
-        var numberOfTasks = 20;
+        
         function selectRandomSpots() {
             // Reset selected spots and index
             selectedSpots = [];
