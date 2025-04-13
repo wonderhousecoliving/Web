@@ -1,31 +1,23 @@
 floor,floorName,id,name,descripcion
-Floor0,Downstairs,oistersroom,Oisters Room,Haz un rompecabezas de 6 piezas.
-Floor0,Downstairs,otherkitchen,Other Kitchen,Haz una figura con plastilina o papel.
-Floor0,Downstairs,cellar,Cellar,Escribe una palabra usando el abecedario al revés.
-Floor0,Downstairs,dungeon,Dungeon,Tira 3 bolas de papel en una papelera desde 2 metros de distancia.
-Floor0,Downstairs,dungeontoilet,Dungeon Toilet,Ordena 5 vasos según su cantidad de agua (de más a menos).
-Floor0,Downstairs,oisterstoilet,Oisters Toilet,Abre un sobre y resuelve el acertijo que hay dentro.
-Floor0,Downstairs,walrusroom,Walrus Room,Nombra 10 películas en 15 segundos.
-Floor0,Downstairs,otherlivingroom,Other Living Room,Haz 10 sentadillas en voz alta contando.
-Floor0,Downstairs,tweedledeeroom,Tweedledee Room,Dibuja un autorretrato en 30 segundos.
-Floor0,Downstairs,bbq,BBQ,Transporta un vaso lleno de agua sin derramarlo desde la cocina hasta el baño.
-Floor0,Downstairs,bbqchill,BBQ Chill,Haz una figura con plastilina o papel.
-Floor0,Downstairs,apartment,Apartment,Haz una declaración de amor fingida mirando al espejo.
-Floor1,Ground Floor,trianglepool,Triangle Pool,Haz una figura con plastilina o papel.
-Floor1,Ground Floor,patio,Patio,Dibuja un autorretrato en 30 segundos.
-Floor1,Ground Floor,gardentable,Garden Table,Coloca 3 objetos en equilibrio uno sobre otro.
-Floor1,Ground Floor,gardenspot,Garden Spot,Tómate una selfie con la cara más fea posible y enséñala a un moderador.
-Floor1,Ground Floor,mainentrance,Main Entrance,Haz una declaración de amor fingida mirando al espejo.
-Floor1,Ground Floor,cornerroom,Corner Room,Ordena 5 vasos según su cantidad de agua (de más a menos).
-Floor1,Ground Floor,toilet,Toilet,Haz una figura con plastilina o papel.
-Floor1,Ground Floor,cinemaroom,Cinema Room,Llena un vaso hasta una línea marcada con agua exacta.
-Floor1,Ground Floor,livingroom,Living Room,Abre un sobre y resuelve el acertijo que hay dentro.
-Floor1,Ground Floor,dinningroom,Dinning Room,Recita un poema o trabalenguas sin equivocarte.
-Floor1,Ground Floor,madhatter,Mad Hatter,Transporta un vaso lleno de agua sin derramarlo desde la cocina hasta el baño.
-Floor1,Ground Floor,kitchen,Kitchen,Tira 3 bolas de papel en una papelera desde 2 metros de distancia.
-Floor2,Upstairs,scaryroom,Scary Room,Haz un rompecabezas de 6 piezas.
-Floor2,Upstairs,coworkingroom1,Coworking Room 1,Abre un sobre y resuelve el acertijo que hay dentro.
-Floor2,Upstairs,balcony,Balcony,Dobla 3 prendas de ropa y déjalas en el sofá.
-Floor2,Upstairs,coworkingroom2,Coworking Room 2,Transporta un vaso lleno de agua sin derramarlo desde la cocina hasta el baño.
-Floor2,Upstairs,canterpillarroom2,Canterpillar Room Spot 1,Transporta un vaso lleno de agua sin derramarlo desde la cocina hasta el baño.
-Floor2,Upstairs,canterpillarroom1,Canterpillar Room Spot 2,Recita un poema o trabalenguas sin equivocarte.
+Floor0,Downstairs,otherkitchen,Downstairs Kitchen,Put your head inside the over and think about Sylvia Plath.
+Floor0,Downstairs,otherlivingroom,Other Living Room,Pretend you are a cow for 20 secs.
+Floor0,Downstairs,bbq,BBQ,Use the matches to form a word (any word).
+Floor1,Vincent the dog,undefined,Whereever he is,Find Vincent and pet him.
+Floor1,Ground Floor,trianglepool,Triangle Pool,Make a wish to the triangle pool god.
+Floor1,Ground Floor,patio,Patio,Come up with a brand new yoga pose. Do it and yell its name outloud.
+Floor1,Ground Floor,gardentable,Garden Table,Lay on the hammock.
+Floor1,Ground Floor,gardenspot,Garden Spot,Sit on the place and look at the flowers for 20 secs.
+Floor1,Ground Floor,mainentrance,Main Entrance,Take a selfie with the ugliest possible.
+Floor1,Ground Floor,cornerroom,Corner Room,Do 15 squads.
+Floor1,Ground Floor,toilet,Toilet,Take an imaginary shower and sing in it.
+Floor1,Ground Floor,cinemaroom,Cinema Room,Take the cushions from the floor and put them nicely on the sofas. Then throw them on the floor again.
+Floor1,Ground Floor,livingroom,Living Room,Throw 5 paper balls inside the bucket.
+Floor1,Ground Floor,dinningroom,Dinning Room,Draw a self-portrait on the white board (Don't erase the previous ones!).
+Floor1,Ground Floor,kitchen,Kitchen,Make a piramid with 9 plastic glasses and then destroy it.
+Floor2,Upstairs,scaryroom,Scary Room,Dance and sing Macarena until ehhh Macarena.
+Floor2,Upstairs,coworkingroom1,Coworking Room 1,Sit on the desk and rehersal your fictional work resign.
+Floor2,Upstairs,balcony,Balcony, Sit on a chair and think about the universe for 20 seconds.
+Floor2,Upstairs,coworkingroom2,Coworking Room 2,Locate the router. Neel and thank the wifi god for its service.
+Floor2,Upstairs,canterpillarroom1,Canterpillar Room,Sit on the old sofa and think about how lucky you are you don't have to sleep in this room tonight.
+Floor2,Upstairs,witchroom,Witch Room, Say this spell outloud: 'Kandam Estratta Montosse Irgrets Gat Nosferatos Kanda Amantos Kanda!''
+

@@ -181,6 +181,7 @@ margin: auto;
                 spotInfo.textContent = 'Error loading spots data';
             });
 
+        var numberOfTasks = 20;
         function selectRandomSpots() {
             // Reset selected spots and index
             selectedSpots = [];
@@ -190,7 +191,7 @@ margin: auto;
             const availableSpots = [...spots];
             
             // Select 10 random unique spots
-            while (selectedSpots.length < 10 && availableSpots.length > 0) {
+            while (selectedSpots.length <numberOfTasks && availableSpots.length > 0) {
                 const randomIndex = Math.floor(Math.random() * availableSpots.length);
                 selectedSpots.push(availableSpots[randomIndex]);
                 availableSpots.splice(randomIndex, 1);
@@ -221,7 +222,7 @@ margin: auto;
             const currentSpot = selectedSpots[currentSpotIndex];
             
             // Update counter
-            document.getElementById('task-counter').textContent = `Task ${currentSpotIndex + 1}/10`;
+            document.getElementById('task-counter').textContent = `Task ${currentSpotIndex + 1}/${numberOfTasks }`;
             
             // Update info display
             document.getElementById('floor-info').textContent = currentSpot.floorId;

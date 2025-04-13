@@ -482,6 +482,7 @@
       <circle id="balcony" class="cls-17" cx="141.41" cy="100.44" r="5"/>
       <circle id="coworkingroom1" class="cls-17" cx="78.76" cy="28.42" r="5"/>
       <circle id="scaryroom" class="cls-17" cx="266.12" cy="43.79" r="5"/>
+      <circle id="witchroom" class="cls-17" cx="278.12" cy="49.79" r="5"/>
     </g>
   </g>
 </svg>
