@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // Animate menu bubbles SVG
-    animateMenuBackground();
+   // animateMenuBackground();
 });
 
 function animateMenuBackground() {
@@ -77,18 +77,19 @@ function animatePath(pathElement) {
         let d = `M0 0 H${width} V${baseY} `;
        ////
        for (let i = numWaves; i > 0; i--) {
+       
         const x2 = (i - 1) * waveLength;
         const x1 = x2 + waveLength / 2;
         const cp1x = x1 + waveLength / 4;
         const cp1y = baseY + Math.sin(t + i) * height;
-        const cp2x = x1 - waveLength / 4;
+        const cp2x = (x1 - waveLength / 4);
         const cp2y = baseY - Math.sin(t + i) * height;
         d += `C${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x2} ${baseY} `;
       }
     ////
         d += "Z";
         pathElement.setAttribute("d", d);
-        t += 0.004;
+        t += 0.04;
         requestAnimationFrame(updateWave);
       }
 
