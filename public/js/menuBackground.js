@@ -113,27 +113,34 @@ function initMenuBackground() {
         vec2 uv = vTextureCoord;
         
         // Create noise at different scales and movement speeds
-        float scale1 = 4.0; // Larger scale for main noise pattern
-        float scale2 = 15.0; // Smaller scale for detail
+        float scale1 = 0.7; // Larger scale for main noise pattern
+        float scale2 = 1.5; // Smaller scale for detail
         
-        // Get noise value at different scales
-        float noiseVal1 = cnoise(vec3(uv * scale1, time * 0.4)) * 0.6;
-        float noiseVal2 = cnoise(vec3(uv * scale2, time * 0.15)) * 0.4;
+        // Adjust X scale to be wider
+        vec2 scale1XY = vec2(scale1 * 9.0, scale1);
+        vec2 scale2XY = vec2(scale2 * 9.0, scale2);
+        
+        // Get noise value at different scales with adjusted X scale
+        float noiseVal1 = cnoise(vec3(uv * scale1XY, time * 0.4)) * 0.6;
+        float noiseVal2 = cnoise(vec3(uv * scale2XY, time * 0.15)) * 0.4;
         
         // Combine noise values
         float combinedNoise = (noiseVal1 + noiseVal2) * 0.6 + 0.4;
+        
+        // Create gradient
         float gradient = 1.0 - uv.y;
-        gradient*=gradient*gradient;
+        gradient *= pow(gradient, 1.5);
+        
         // Adjust noise to make it more contrasted and keep desired values in 0-1 range
-         combinedNoise += gradient;
-         combinedNoise*=gradient;
-        combinedNoise = smoothstep(0.1, 0.7, combinedNoise);
+        combinedNoise += gradient;
+        combinedNoise *= gradient;
+        combinedNoise = smoothstep(0.15, 0.152, combinedNoise);
         
-        // Creates a more natural pattern with fade at the bottom
-       
+        // Create a solid background with the bright color
+        vec4 backgroundColor = vec4(brightColor, 1.0);
         
-        // Final color: brightColor with alpha based on noise
-        gl_FragColor = vec4(brightColor,combinedNoise);
+        // Mix between transparent and background color based on noise
+        gl_FragColor = mix(vec4(0.0), backgroundColor, combinedNoise);
     }
     `;
 
