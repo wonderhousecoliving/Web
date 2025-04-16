@@ -1,0 +1,29 @@
+<div class="roomWidget">
+    <h3>{{type}}</h3>
+    <div class="selectedRoomPhoto">
+        <img class="selectedImage" id="mainImage" src="{{image}}" loading="lazy" />
+          <div class="roomContent">
+                         
+            <div class="roomDescription">
+                <h3>{{name}}</h3>
+                <p>{{description}}</p>
+            </div>
+            <div class="roomPrice">
+                <div class="oldPrice">{{price}}</div>
+                <div>
+                    <div class="offer">{{offer}}</div>
+                    {{discountedPrice}}
+                </div>
+            </div>
+            <img class="bubbleBg" src="imgs/RoomBubbleBg.svg"  loading="lazy" />
+          
+        </div>
+       
+    </div>
+    <div class="roomGallery">
+        <img src="{{image}}"  class="galleryThumbnail" loading="lazy" />
+        <img src="{{image}}" class="galleryThumbnail" loading="lazy" />
+        <img src="{{image}}" class="galleryThumbnail" loading="lazy" />
+        <img src="{{image}}" class="galleryThumbnail" loading="lazy" />
+    </div>
+</div> 
