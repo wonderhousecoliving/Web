@@ -381,95 +381,26 @@ button.btn:hover {
 
 /* Room styling */
 .roomWidget {
-  
+    border-radius: var(--roundedRadius);
     overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     margin-bottom: 2rem;
-    border-radius: 15px;
-}
-.bubbleBg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-.roomWidget .selectedRoomPhoto {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: var(--roundedRadius);
-    overflow: hidden;
-    position: relative;
-}
-.roomWidget .selectedRoomPhoto img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: var(--roundedRadius);
-}
-.roomWidget .selectedRoomPhoto .roomContent {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-    padding: 20px;
-    z-index: 100;
-    border-bottom-left-radius: var(--roundedRadius);
-    border-bottom-right-radius: var(--roundedRadius);
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    gap: 10px;
-}
-.roomGallery {
-    margin-top: 10px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    width: 100%;
-}
-.roomGallery img {
-    width: 100%;
-    height: 100px;
-    aspect-ratio: 1;
-    object-fit: cover;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-.roomGallery img:hover {
-    transform: scale(1.05);
 }
 
+.roomContent {
+    padding: 1.5rem;
+}
 
 .roomPrice {
-    z-index: 200;
     display: flex;
-    flex-direction: column;
-    justify-content: right;
-    flex-grow: 1;
-    text-align: right;
-    margin-top: auto;
-    position: relative;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background-color: var(--bright);
+    font-weight: 600;
 }
 
-.roomPrice .oldPrice {
-    text-decoration: line-through;
+.offer {
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
 }
-
-.roomDescription {
-    z-index: 200;
-    margin-top: auto;
-    position: relative;
-}
-.roomDescription h3 {   
-    margin: 0px;
-    padding: 0px;
-}
-.roomDescription p {
-    font-size: 1rem;
-    margin: 0px;
-}
-
