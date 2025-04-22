@@ -38,12 +38,7 @@ async function createLandingBackground(container) {
     imgContainer.x = app.screen.width / 2;
     imgContainer.y = app.screen.height / 2;
 
-    // Set sprite size to match container while maintaining aspect ratio
-    const scale = Math.min(
-        app.screen.width / texture.width,
-        app.screen.height / texture.height
-    );
-    sprite.scale.set(scale);
+   
 
     imgContainer.addChild(sprite);
 
@@ -57,7 +52,7 @@ async function createLandingBackground(container) {
             time: 0.0,
             resolutionX: container.clientWidth,
             resolutionY: container.clientHeight,
-            noiseScale: 0.7,
+            noiseScale: 0.9,
             showNoise: true
         };
 
@@ -72,15 +67,11 @@ async function createLandingBackground(container) {
 
         // Handle window resize
         function resizeApp() {
-          //  app.renderer.resize(Math.max(app.screen.width, 1920), container.clientHeight);
-            app.renderer.resize(container.clientWidth, container.clientHeight);
+           app.renderer.resize(Math.max(app.screen.width, 920), container.clientHeight);
+          //  app.renderer.resize(container.clientWidth, container.clientHeight);
              imgContainer.x = app.screen.width / 2;
              imgContainer.y = app.screen.height / 2;
-            const scale = Math.min(
-                app.screen.width / texture.width,
-                app.screen.height / texture.height
-            );
-             sprite.scale.set(scale);
+            
              uniforms.resolutionX = container.clientWidth;
              uniforms.resolutionY = container.clientHeight;
         }

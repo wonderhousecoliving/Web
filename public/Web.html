@@ -8,12 +8,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/mobile.css">
     <script src="https://cdn.jsdelivr.net/npm/vivus@latest/dist/vivus.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gl-matrix@3.4.3/gl-matrix-min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.3.2/dist/pixi.min.js"></script>
+    <script src="https://d2q3n06xhbi0am.cloudfront.net/calendar.js"></script>
     <script src="js/menuBackground.js"></script>
+    <script src="js/landingBackground.js"></script>
     <script src="js/animation.js"></script>
+    <script src="js/bubbledImage.js"></script>
+  
+  
 </head>
 <body>
     <header>
@@ -24,28 +30,31 @@
                 <li><a href="#experience">The Experience</a></li>
                 <li><a href="#rooms">Rooms</a></li>
                 <li><a href="#faq">FAQ</a></li>
-                <li><a href="#book">Book</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a class="bookButton" href="https://wonderhouse.holidayfuture.com/all-listings">Book</a></li>
             </ul>
         </nav>
     </header>
     <main class="mainContainer">
         <section class="Section landing" aria-label="Welcome section">
+            <div id="landingBackground"></div>
             <div class="logo-container"> 
                 <object id="logo-svg" data="imgs/LineLogoWhite.svg" type="image/svg+xml" width="200" height="200" aria-label="Wonder House Logo">
                     <img src="imgs/LineLogoWhite.svg" alt="Wonder House Coliving" width="200" class="fallback" />
                 </object>
             </div>
                   </section>
-        
+            
         <section id="home" class="wonderHouse Section" aria-label="About Wonder House">
-            <h1>Welcome to Wonder House</h1>
+            <!-- <h1>Welcome to Wonder House</h1> -->
             <article>
                 <h2>The definitive coliving experience</h2>
                 <div class="sectionContent">
                     <p>Welcome to Wonder House, a unique rural coliving space nestled in the heart of Montseny Natural Park.
                         Located just one hour from Barcelona, with frequent direct trains connecting you to Barcelona city center and even the airport, Wonder House offers both tranquility and convenience. At Wonder House, you'll find a place to reconnect with yourself and like-minded individuals, enjoying authentic community living in a stunning natural environment.</p>
-                    <img src="imgs/WonderPicture1.png" alt="Wonder House exterior view" loading="lazy" />
+                  <div>
+                     <img id="wonderHouseImage1" src="imgs/WonderPicture1.png" alt="Wonder House exterior view" loading="lazy" />
+                    </div> 
                 </div>
             </article>
             <article>
@@ -102,14 +111,31 @@
                 <img src="imgs/WonderPicture1.png" alt="Local exploration" loading="lazy" />
             </div>
         </section>
-        
+       
         <section id="rooms" class="rooms Section" aria-label="Room options">
             <h1>Rooms</h1>
             <p>We offer different types of rooms to fit every style and budget. Whether you're looking for privacy, comfort, or the opportunity to connect more closely with others, you'll find a cozy space here that feels just right for you. Explore the options below and choose the perfect setting for your coliving experience.</p>
+            <h2>Search availability</h2>
+            <script src="https://d2q3n06xhbi0am.cloudfront.net/widget.js?1640277196"></script>
+            <script>
+              window.searchBar({
+                baseUrl: 'https://wonderhouse.holidayfuture.com',
+                showLocation: true,
+                color: '#cc2dcf',
+                rounded: true,
+                openInNewTab: true, // or false
+                font: 'Open Sans',
+              });
+            </script>
+            <div id="hostaway-booking-widget"></div>
             
+            <h2 class="roomsTitle">Our rooms</h2>
             <div id="roomsContainer">
                 
             </div>
+          
+
+
         </section>
         
         <section id="faq" class="FAQ Section" aria-label="Frequently asked questions">
@@ -145,7 +171,7 @@
             </div>
         </section>
         
-        <section id="book" class="Book Section" aria-label="Booking form">
+        <!-- <section id="book" class="Book Section" aria-label="Booking form">
             <h2>Book Your Stay</h2>
             <p>Ready to join us at Wonder House? Fill out the form below to request availability and begin your coliving journey.</p>
             
@@ -202,11 +228,25 @@
                 
                 <button type="submit" class="btn">Request Booking</button>
             </form>
-        </section>
+        </section> -->
         
        
     </main>
     <footer id="contact" class="Footer Section" aria-label="Contact information">
+        <iframe
+  width="100%"
+  height="450"
+  style="border:0"
+  loading="lazy"
+  allowfullscreen
+  referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCAM5KXWVuV-oegveHVu2qDSL_75k3Eo_8
+    &q=Wonder House Coliving
+    &zoom=9
+    &center=41.5681047,2.2631208
+  ">
+</iframe>
+<div class="contact-info-container">
         <div class="contact-info">
             <h2>Contact Us</h2>
             <p><strong>Email:</strong> <a href="mailto:info@wonderhousecoliving.com">info@wonderhouse.com</a></p>
@@ -215,24 +255,25 @@
         </div>
         
         <div class="social-media">
-            <h3>Follow Us</h3>
+            <h2>Follow Us</h2>
             <div class="social-icons">
-                <a href="https://instagram.com/wonderhouse" aria-label="Instagram"><span class="icon-instagram"></span></a>
-                <a href="https://facebook.com/wonderhouse" aria-label="Facebook"><span class="icon-facebook"></span></a>
-                <a href="https://twitter.com/wonderhouse" aria-label="Twitter"><span class="icon-twitter"></span></a>
+                <a href="https://instagram.com/wonderhouse" aria-label="Instagram"><span class="footerIcon icon-instagram"></span></a>
+                <a href="https://facebook.com/wonderhouse" aria-label="Whatsapp"><span class="footerIcon icon-whatsapp"></span></a>
+                <a href="https://twitter.com/wonderhouse" aria-label="Telegram"><span class="footerIcon icon-telegram"></span></a>
             </div>
         </div>
         
         <div class="footer-links">
             <a href="/privacy-policy">Privacy Policy</a>
             <a href="/terms-conditions">Terms & Conditions</a>
+            <p>Made by someone that would rather be at the hammock right now. 2025</p>
+      
         </div>
         
-        <div class="copyright">
-            <p>Made by someone that would rather be at the hammock right now. 2025</p>
-        </div>
+        
+    </div>
     </footer>
-    <script src="scripts/main.js"></script>
     <script src="js/roomWidget.js"></script>
+    <script src="js/hostwayIntegration.js"></script>
 </body>
 </html>

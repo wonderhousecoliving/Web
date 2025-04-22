@@ -3,9 +3,10 @@ const roomsData = [
     {
         type: "Apartments - Private bathroom",
         name: "White Rabbit Apartment",
+        listingId: 74771,
         description: "Private access, TV, kitchenette, sofa, ensuite bathroom.",
         price: "1770€/Month",
-        offer: "Special offer! 50% off!",
+        offer: "Opening offer!",
         discountedPrice: "885€/Month",
         image: "imgs/WonderPicture1.png",
         gallery: [
@@ -18,6 +19,7 @@ const roomsData = [
     {
         type: "Private Room",
         name: "Mad Hatter Room",
+        listingId: 383946,
         description: "Cozy private room with shared bathroom, desk, and wardrobe.",
         price: "1200€/Month",
         offer: "Special offer! 30% off!",
@@ -33,6 +35,7 @@ const roomsData = [
     {
         type: "Shared Room",
         name: "Cheshire Cat Room",
+        listingId: 74774,
         description: "Comfortable shared room with bunk beds, perfect for making new friends.",
         price: "800€/Month",
         offer: "Special offer! 25% off!",
@@ -73,7 +76,7 @@ function renderRoom(roomData, template) {
     html = html.replace('{{offer}}', roomData.offer);
     html = html.replace('{{discountedPrice}}', roomData.discountedPrice);
     html = html.replace('{{image}}', roomData.image);
-    
+    html = html.replace('{{listingId}}', roomData.listingId);
     return html;
 }
 
@@ -88,8 +91,8 @@ function initGallery(roomWidget, roomData) {
             thumbnail.src = roomData.gallery[index];
             thumbnail.alt = `${roomData.name} - Gallery image ${index + 1}`;
             
-            // Añadir evento click para cambiar la imagen principal
-            thumbnail.addEventListener('click', () => {
+            // Cambiar el evento de click a hover
+            thumbnail.addEventListener('mouseenter', () => {
                 mainImage.src = roomData.gallery[index];
                 mainImage.alt = `${roomData.name} - Gallery image ${index + 1}`;
             });
@@ -111,11 +114,12 @@ async function loadAndRenderRooms() {
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = roomHtml;
         const roomWidget = tempDiv.firstElementChild;
-        
+     
         // Inicializar la galería para esta habitación
         initGallery(roomWidget, roomData);
         
         roomsContainer.appendChild(roomWidget);
+        
     });
 }
 

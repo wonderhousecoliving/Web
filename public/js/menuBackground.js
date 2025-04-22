@@ -129,7 +129,7 @@ function initMenuBackground() {
         
         // Create gradient
         float gradient = 1.0 - uv.y;
-        gradient *= pow(gradient, 1.5);
+        gradient *= pow(gradient, 2.0);
         
         // Adjust noise to make it more contrasted and keep desired values in 0-1 range
         combinedNoise += gradient;
@@ -168,7 +168,7 @@ function initMenuBackground() {
 
     // Handle window resize
     window.addEventListener('resize', () => {
-        app.renderer.resize(window.innerWidth, 150);
+        app.renderer.resize(Math.max(app.screen.width, 1920), 150);
         quad.width = app.screen.width;
         uniforms.resolution = [app.screen.width, app.screen.height];
     });

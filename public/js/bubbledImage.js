@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+   
+
     const image = document.querySelector('#wonderHouseImage1');
     if (image) {
         // Esperar a que la imagen cargue
@@ -22,8 +24,8 @@ async function loadShader(url) {
         throw error;
     }
 }
-
-async function createBubbledImage(imageElement) {
+// points: array of points with x,y,radius
+async function createBubbledImage(imageElement,shapingPoints) {
     // Obtener el contenedor de la imagen
     const container = imageElement.parentNode;
     
@@ -35,35 +37,50 @@ async function createBubbledImage(imageElement) {
     const containerHeight = container.clientHeight;
     imageElement.style.opacity='0.0';
 
-    console.log('Container dimensions:', containerWidth, containerHeight);
     
     // Create PIXI Application with transparent background
     const app = new PIXI.Application({
-        width: containerWidth,
-        height: containerHeight,
+      
+        width:container.clientWidth*window.devicePixelRatio,
+        height: container.clientHeight*window.devicePixelRatio,
+        resolution: 1/window.devicePixelRatio, 
         backgroundAlpha: 0,
-        antialias: true,
-        resolution: window.devicePixelRatio || 1,
-        autoDensity: true,
+       // resizeTo: container,
+        autoDensity: false
     });
 
     // Configurar el canvas
     app.view.style.position = 'absolute';
-    app.view.style.top = '0';
-    app.view.style.left = '0';
-    app.view.style.width = '100%';
-    app.view.style.height = '100%';
-    app.view.style.zIndex = '1';
+    app.view.style.top = '0px';
+    app.view.style.left = '0px';
+   
+   // app.view.style.width = (containerWidth+100)+'px';
+   // app.view.style.height = (containerHeight+100)+'px';
+   // app.view.style.zIndex = '1';
+   // app.view.style.backgroundColor='rgba(0,0,0,0.5)';
     
     // Insertar el canvas después de la imagen
     container.appendChild(app.view);
 
-    // Create texture from the image
+    const imgContainer = new PIXI.Container();
+    app.stage.addChild(imgContainer);
+
     const texture = PIXI.Texture.from(imageElement);
     const sprite = new PIXI.Sprite(texture);
-    sprite.width = containerWidth;
-    sprite.height = containerHeight;
-    app.stage.addChild(sprite);
+    
+    // Mantener el tamaño original del sprite
+    sprite.width =imageElement.clientWidth*window.devicePixelRatio;
+    sprite.height = imageElement.clientHeight*window.devicePixelRatio;
+    
+    // Desactivar el escalado automático
+    sprite.autoResize = false;
+
+    imgContainer.addChild(sprite);
+    imgContainer.x = 10;
+    imgContainer.y = 10;
+
+
+
 
     try {
         // Load the shader from external file
@@ -72,10 +89,14 @@ async function createBubbledImage(imageElement) {
         // Create the shader uniform values
         const uniforms = {
             time: 0.0,
-            resolution: [containerWidth, containerHeight],
+            resolutionX: 256.0,
+            resolutionY: 256.0,
+            imageResolutionX: imageElement.naturalWidth,
+            imageResolutionY: imageElement.naturalHeight,
             noiseScale: 0.5,
             showNoise: false
         };
+
 
         // Create and apply the shader
         const shader = new PIXI.Filter(undefined, shaderSource, uniforms);
@@ -86,43 +107,19 @@ async function createBubbledImage(imageElement) {
             uniforms.time += delta * 0.01;
         });
 
-        // Load controls from HTML file
-        const controlsResponse = await fetch('controls/bubbledImageControls.html');
-        const controlsHTML = await controlsResponse.text();
-        
-        // Create a temporary container to parse the HTML
-        const tempContainer = document.createElement('div');
-        tempContainer.innerHTML = controlsHTML;
-        
-        // Get the controls container and append it to the body
-        const controlsContainer = tempContainer.querySelector('.controls-container');
-        document.body.appendChild(controlsContainer);
-        
-        // Get the controls elements
-        const noiseScaleSlider = document.getElementById('noiseScale');
-        const noiseScaleValue = document.getElementById('noiseScaleValue');
-        const showNoiseCheckbox = document.getElementById('showNoise');
-        
-        // Add event listeners
-        noiseScaleSlider.addEventListener('input', (e) => {
-            uniforms.noiseScale = parseFloat(e.target.value);
-            noiseScaleValue.textContent = uniforms.noiseScale;
-        });
-        
-        showNoiseCheckbox.addEventListener('change', (e) => {
-            uniforms.showNoise = e.target.checked;
-        });
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            const newWidth = imageElement.clientWidth;
-            const newHeight = imageElement.clientHeight;
+       
+        function resizeApp() {
+            app.width= container.clientWidth*window.devicePixelRatio;
+            app.height= container.clientHeight*window.devicePixelRatio;
             
-            app.renderer.resize(1024, 1024);
-            sprite.width = newWidth;
-            sprite.height = newHeight;
-            uniforms.resolution = [newWidth, newHeight];
-        });
+            // Solo actualizar el tamaño del canvas, no el contenido
+          //  app.view.style.width = (containerWidth-500)+'px';
+          //  app.view.style.height = (containerHeight-100)+'px';
+        }
+        //resizeApp();
+        // Handle window resize
+        window.addEventListener('resize', resizeApp
+        );
 
     } catch (error) {
         console.error('Error creating shader:', error);

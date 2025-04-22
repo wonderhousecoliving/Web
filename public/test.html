@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Canvas Test</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    canvas {
+      border: 1px solid white;
+    }
+  </style>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.3.2/dist/pixi.min.js"></script>
+  <script>
+    const app = new PIXI.Application({
+      width: window.innerWidth*window.devicePixelRatio,
+      height: window.innerHeight*window.devicePixelRatio,
+      backgroundColor: 0x222222,
+      resolution: 1/window.devicePixelRatio, // píxeles lógicos = reales
+      autoDensity: false
+    });
+
+    document.body.appendChild(app.view);
+
+    // Dibuja un cuadrado rojo de 512x512
+    const g = new PIXI.Graphics();
+    g.beginFill(0xff0000);
+    g.drawRect(0, 0, 512, 512);
+    g.endFill();
+    g.x = 0;
+    g.y = 0;
+    app.stage.addChild(g);
+
+    // Medidas reales del canvas y del cuadrado
+    console.log("canvas logical size:", app.view.width, app.view.height);
+    console.log("canvas physical size:", app.view.getBoundingClientRect().width, app.view.getBoundingClientRect().height);
+    console.log("devicePixelRatio:", window.devicePixelRatio);
+  </script>
+</body>
+</html>

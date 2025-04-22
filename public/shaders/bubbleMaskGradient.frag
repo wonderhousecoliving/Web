@@ -93,8 +93,8 @@ void main() {
         float scale2 = 0.6; // Smaller scale for detail
         
         // Adjust X scale to be wider
-        vec2 scale1XY = vec2(scale1 * 9.0, scale1);
-        vec2 scale2XY = vec2(scale2 * 9.0, scale2);
+        vec2 scale1XY = vec2(scale1 * 9.0, scale1/1.0);
+        vec2 scale2XY = vec2(scale2 * 14.0, scale2/1.0);
         
         // Get noise value at different scales with adjusted X scale
         float noiseVal1 = cnoise(vec3(uv * scale1XY, time * 0.4)) * 0.6;
@@ -105,15 +105,15 @@ void main() {
         
         // Create gradient
         float gradient = 1.0 - uv.y;
-        gradient *= pow(gradient, 1.0);
+     //   gradient *= pow(gradient, 1.0);
         
         // Adjust noise to make it more contrasted and keep desired values in 0-1 range
         combinedNoise += gradient;
         combinedNoise *= gradient;
-        combinedNoise = smoothstep(0.15, 0.152, combinedNoise);
+        combinedNoise = smoothstep(0.06, 0.061, combinedNoise);
         
       
         
         // Mix between transparent and background color based on noise
-        gl_FragColor = mix(vec4(0.0), originalColor, combinedNoise);
+        gl_FragColor = mix(vec4(0.0,0.0,0.0,0.0), originalColor, combinedNoise);
 }

@@ -1,0 +1,136 @@
+/* Media queries para dispositivos móviles */
+@media screen and (max-width: 768px) {
+
+    .menu {
+    display: none;
+    }
+
+    .mainContainer {
+        width: 100vw;
+        max-width: 100vw;
+    }
+   
+    .wonderHouse article:nth-of-type(1) .sectionContent {
+    display: inline;
+}
+
+    .wonderHouse article:nth-of-type(1) .sectionContent img {
+        width: 493px;
+        height: 244px;
+    }
+
+    .wonderHouse article:nth-of-type(2) .sectionContent {
+        display: flex;
+        flex-direction: column-rever;
+        gap: var(--gapMedium);
+    }
+
+    .wonderHouse article:nth-of-type(2) .sectionContent img {
+        width: 100%;
+        height: 200px;
+    }
+
+    .wonderHouse article:nth-of-type(3) .sectionContent {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: var(--gapMedium);
+    }
+
+    .wonderHouse article:nth-of-type(3) .sectionContent img {
+        width: 100%;
+        height: 400px;
+    }
+   
+    .experience .pillars {
+        display: block;
+        width: 100%;
+    }
+
+    .experience .pillars .pillar {
+     
+        margin: 10px 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 20px;
+        height: 400px;
+        background-color: var(--dark);
+        border-radius: var(--roundedRadius);
+    }
+    .experience .lifeGallery img{
+        width: 100%;
+    }
+
+    .wonderGallery img:nth-of-type(1) {
+        flex-grow: 1;
+    }
+    
+    .wonderGallery img:nth-of-type(2) {
+        min-width: 60%;
+    }
+    
+    .wonderGallery img:nth-of-type(3) {
+        width: 38%;
+    }
+    
+    .wonderGallery img:nth-of-type(4) {
+        flex-grow: 1;
+    }
+
+
+  
+    /* Cambiar la orientación del flex a row en el contenedor de habitaciones */
+    #roomsHostaway {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    /* Ajustar el tamaño de las tarjetas de habitación en móvil */
+    .room-card {
+        width: 45%;
+        margin: 10px 0;
+    }
+
+    /* Ajustar el contenedor de imágenes en móvil */
+    .room-images {
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+    }
+
+    /* Ajustar el tamaño de las imágenes en móvil */
+    .room-image {
+        min-width: 100%;
+        scroll-snap-align: start;
+    }
+    .roomDescription {
+        width: 60%;
+        z-index: 200;
+        margin-top: auto;
+        position: relative;
+    }
+    .roomWidget .selectedRoomPhoto img {
+        width: 100%;
+        object-fit: cover;
+        border-radius :  0px;
+    }
+    .bubbleBg{
+      background-color: white;
+      border-radius :  0px;
+    }
+
+    .hsbw-grid.hsbw-grid--locations {
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        padding: 20px;
+    }
+    .hsbw-main-button{
+        width: 100%;
+        margin-left: 0px;
+    }
+   
+}
