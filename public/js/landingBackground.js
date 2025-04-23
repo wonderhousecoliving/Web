@@ -25,23 +25,72 @@ async function createLandingBackground(container) {
     // Insert canvas into container
     container.appendChild(app.view);
 
-    // Create container for the image
-    const imgContainer = new PIXI.Container();
-    app.stage.addChild(imgContainer);
+    // Create container for the video and background
+    const videoContainer = new PIXI.Container();
+    app.stage.addChild(videoContainer);
 
-    // Load the background image
-    const texture = await PIXI.Texture.from('imgs/WonderPicture0.png');
-    const sprite = new PIXI.Sprite(texture);
+    // Load background image first
+    const bgTexture = await PIXI.Texture.from('imgs/WonderPicture0.png');
+    const bgSprite = new PIXI.Sprite(bgTexture);
+    
+    // Center and scale background
+    bgSprite.anchor.set(0.5);
+    bgSprite.scale.set(Math.min(
+        app.screen.width / bgSprite.width,
+        app.screen.height / bgSprite.height
+    ));
+    videoContainer.addChild(bgSprite);
 
-    // Centrar el sprite
-    sprite.anchor.set(0.5);
-    imgContainer.x = app.screen.width / 2;
-    imgContainer.y = app.screen.height / 2;
+    // Create video element
+    const video = document.createElement('video');
+    video.src = 'imgs/LandingVideo.mp4';
+    video.loop = true;
+    video.muted = true;
+    video.autoplay = true;
+    video.playsInline = true;
+    video.preload = 'auto';
 
-   
+    // Create canvas for video
+    const videoCanvas = document.createElement('canvas');
+    const videoCtx = videoCanvas.getContext('2d');
+    
+    // Set canvas size
+    videoCanvas.width = container.clientWidth;
+    videoCanvas.height = container.clientHeight;
 
-    imgContainer.addChild(sprite);
+    // Create texture from canvas
+    const videoTexture = PIXI.Texture.from(videoCanvas);
+    const videoSprite = new PIXI.Sprite(videoTexture);
 
+    // Center the video sprite
+    videoSprite.anchor.set(0.5);
+    videoSprite.scale.set(Math.min(
+        app.screen.width / videoSprite.width,
+        app.screen.height / videoSprite.height
+    ));
+
+    // Hide video initially
+    videoSprite.visible = false;
+    videoContainer.addChild(videoSprite);
+
+    // Function to update video frame
+    function updateVideoFrame() {
+        if (video.readyState >= 2) {
+            videoCtx.drawImage(video, 0, 0, videoCanvas.width, videoCanvas.height);
+            videoTexture.update();
+        }
+    }
+
+    // Single event handler for video ready
+    video.addEventListener('canplay', () => {
+        videoSprite.visible = true;
+        bgSprite.visible = false;
+    }, { once: true });
+
+    // Start video playback
+    video.play().catch(error => {
+        console.error('Error playing video:', error);
+    });
 
     try {
         // Load the shader
@@ -56,24 +105,37 @@ async function createLandingBackground(container) {
             showNoise: true
         };
 
-        // Create and apply the shader
+        // Create and apply the shader to both sprites
         const shader = new PIXI.Filter(undefined, shaderSource, uniforms);
-        sprite.filters = [shader];
+        videoSprite.filters = [shader];
+        bgSprite.filters = [shader];
 
         // Animation loop
         app.ticker.add((delta) => {
             uniforms.time += delta * 0.005;
+            updateVideoFrame();
         });
 
         // Handle window resize
         function resizeApp() {
-           app.renderer.resize(Math.max(app.screen.width, 920), container.clientHeight);
-          //  app.renderer.resize(container.clientWidth, container.clientHeight);
-             imgContainer.x = app.screen.width / 2;
-             imgContainer.y = app.screen.height / 2;
+            app.renderer.resize(Math.max(app.screen.width, 920), container.clientHeight);
+            videoContainer.x = app.screen.width / 2;
+            videoContainer.y = app.screen.height / 2;
             
-             uniforms.resolutionX = container.clientWidth;
-             uniforms.resolutionY = container.clientHeight;
+            // Update canvas size
+            videoCanvas.width = container.clientWidth;
+            videoCanvas.height = container.clientHeight;
+            
+            // Update sprites scale to maintain aspect ratio
+            const scale = Math.min(
+                app.screen.width / videoSprite.width,
+                app.screen.height / videoSprite.height
+            );
+            videoSprite.scale.set(scale);
+            bgSprite.scale.set(scale);
+            
+            uniforms.resolutionX = container.clientWidth;
+            uniforms.resolutionY = container.clientHeight;
         }
 
         window.addEventListener('resize', resizeApp);

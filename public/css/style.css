@@ -34,15 +34,17 @@ p, li, label, input, textarea, select, button {
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 1.5rem;
     font-weight: 10;
     letter-spacing: -0.02em;
 }
 
 h2 {
-    font-size: 1.2rem;
+    font-size: 2rem;
     margin-bottom: 1.2rem;
+    font-family: 'Pecita', sans-serif;
+  text-align: center;
 }
 
 h3 {
@@ -213,7 +215,9 @@ header {
     display: flex;
     gap: 30px;
 }
-
+.wonderHouse article:nth-of-type(1)  h2 {
+   margin-bottom: 50px;
+}
 .wonderHouse article:nth-of-type(1) .sectionContent img {
     width: 493px;
     height: 300px;
@@ -335,11 +339,9 @@ header {
 }
 
 .experience .lifeGallery img {
-    flex: .3;
-    width: 280px; 
-    height: 500px;
+ 
+    width: 100%; 
     object-fit: cover;
-    border-radius: var(--roundedRadius);
 }
 .experience h2:nth-of-type(2){
     margin-top: 60px;
@@ -665,5 +667,12 @@ button.btn:hover {
 
 .hsbw-button{
     border-color: var(--accent) !important;
+}
+
+@font-face {
+    font-family: 'Pecita';
+    src: url('../imgs/Pecita.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
 }
 

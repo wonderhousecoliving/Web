@@ -8,6 +8,7 @@ uniform float resolutionY;
 uniform float imageResolutionX;
 uniform float imageResolutionY;
 uniform float noiseScale;
+uniform float boxBorderScale;
 bool showNoise=false;
 
 // Classic Perlin 3D Noise by Stefan Gustavson
@@ -120,7 +121,7 @@ void main() {
     adjustedUV = vec2(adjustedUV.x,adjustedUV.y);
     
    
-float boxMask =blurredFullBox(uv,0.2);
+float boxMask =blurredFullBox(uv,boxBorderScale);
 
     // Create noise at different scales and movement speeds
     float scale1 = 10.5 * noiseScale; // Larger scale for main noise pattern
@@ -138,16 +139,16 @@ float boxMask =blurredFullBox(uv,0.2);
     float combinedNoise = (noiseVal1 + noiseVal2) * 0.6 + 0.4;
     
     // Radio en coordenadas UV
-    float d =sdCircle(uv, vec2(0.5, 0.5), 0.9);
-    float d2= sdCircle(adjustedUV, vec2(0.45, 0.3), 0.15);
-    float d3= sdCircle(adjustedUV, vec2(0.6, 0.6), 0.0);
+   // float d =sdCircle(uv, vec2(0.5, 0.5), 0.9);
+   // float d2= sdCircle(adjustedUV, vec2(0.45, 0.3), 0.15);
+  //  float d3= sdCircle(adjustedUV, vec2(0.6, 0.6), 0.0);
 
    
  
   adjustedUV = uv * imageAspect/naturalImageAspect;
     vec4 imageColor = texture2D(uSampler, adjustedUV);
-
-     float finalUnion = clamp(d+d2+d3, 0.0, 1.0)*boxMask*imageColor.a; 
+//clamp(d+d2+d3, 0.0, 1.0)*
+     float finalUnion = boxMask*imageColor.a; 
     imageColor.a=1.0;
     combinedNoise *= finalUnion;
     //combinedNoise = finalUnion;

@@ -5,14 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Process each image
     images.forEach(image => {
         // Get padding values from attributes or use defaults
-        const paddingHorizontal = parseInt(image.getAttribute('paddingHorizontal')) || 0;
-        const paddingVertical = parseInt(image.getAttribute('paddingVertical')) || 0;
-        
+        let paddingHorizontal = parseInt(image.getAttribute('paddingHorizontal')) || 0;
+        let paddingVertical = parseInt(image.getAttribute('paddingVertical')) || 0;
+        let bubbleNoiseScale = parseFloat(image.getAttribute('bubbleScale')) || 0.7;
+        let boxBorderScale = parseFloat(image.getAttribute('boxBorderScale')) || 0.2;
+
         // Apply the bubble effect
         if (image.complete) {
-            createBubbledImage(image, paddingHorizontal, paddingVertical);
+            createBubbledImage(image, paddingHorizontal, paddingVertical, bubbleNoiseScale,boxBorderScale);
         } else {
-            image.onload = () => createBubbledImage(image, paddingHorizontal, paddingVertical);
+            image.onload = () => createBubbledImage(image, paddingHorizontal, paddingVertical, bubbleNoiseScale,boxBorderScale);
         }
     });
 }); 
@@ -32,7 +34,7 @@ async function loadShader(url) {
     }
 }
 // points: array of points with x,y,radius
-async function createBubbledImage(imageElement, paddingHorizontalPercent, paddingVerticalPercent) {
+async function createBubbledImage(imageElement, paddingHorizontalPercent, paddingVerticalPercent,bubbleNoiseScale,boxBorderScale) {
   
     // Obtener el contenedor de la imagen
     const container = imageElement.parentNode;
@@ -52,7 +54,6 @@ async function createBubbledImage(imageElement, paddingHorizontalPercent, paddin
     // Create PIXI Application with transparent background
     let appWidth = (imageElement.clientWidth*window.devicePixelRatio)+paddingHorizontal;
     let appHeight = (imageElement.clientHeight*window.devicePixelRatio)+paddingVertical;
-    console.log("appWidth,appHeight",imageElement.naturalWidth,imageElement.naturalHeight);
     const app = new PIXI.Application({
         width:appWidth,
         height: appHeight,
@@ -66,11 +67,7 @@ async function createBubbledImage(imageElement, paddingHorizontalPercent, paddin
     app.view.style.top = (-paddingVertical/2)+'px';
     app.view.style.left = (-paddingHorizontal/2)+'px';
     app.view.style.aspectRatio='unset';
-    // app.view.style.width = (containerWidth+100)+'px';
-    // app.view.style.height = (containerHeight+100)+'px';
-    // app.view.style.zIndex = '1';
-  // app.view.style.backgroundColor='rgba(0,0,0,0.5)';
-    
+
     // Insertar el canvas después de la imagen
     container.appendChild(app.view);
 
@@ -122,15 +119,13 @@ async function createBubbledImage(imageElement, paddingHorizontalPercent, paddin
             resolutionY: appHeight,
             imageResolutionX: imageElement.naturalWidth,
             imageResolutionY: imageElement.naturalHeight,
-            noiseScale: 0.5,
+            noiseScale: bubbleNoiseScale,
             showNoise: false,
-            uSampler: texture
+            uSampler: texture,
+            boxBorderScale: boxBorderScale
         };
 
         // Create and apply the shader
-      
-
-
       const shader3D = PIXI.Shader.from(vertexSrc, shaderSource3D,uniforms);
   const mesh = new PIXI.Mesh(geometry, shader3D);
   app.stage.addChild(mesh);
