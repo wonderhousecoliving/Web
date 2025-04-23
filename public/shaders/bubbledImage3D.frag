@@ -1,4 +1,4 @@
-
+precision mediump float;
 
 varying vec2 vUV;
 uniform sampler2D uSampler;
@@ -9,9 +9,9 @@ uniform float imageResolutionX;
 uniform float imageResolutionY;
 uniform float noiseScale;
 uniform float boxBorderScale;
-bool showNoise=false;
+bool showNoise = false;
 
-// Classic Perlin 3D Noise by Stefan Gustavson
+// === Perlin noise ===
 vec4 permute(vec4 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
 vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
 vec3 fade(vec3 t) { return t*t*t*(t*(t*6.0-15.0)+10.0); }
@@ -58,15 +58,9 @@ float cnoise(vec3 P) {
     vec3 g111 = vec3(gx1.w,gy1.w,gz1.w);
 
     vec4 norm0 = taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
-    g000 *= norm0.x;
-    g010 *= norm0.y;
-    g100 *= norm0.z;
-    g110 *= norm0.w;
+    g000 *= norm0.x; g010 *= norm0.y; g100 *= norm0.z; g110 *= norm0.w;
     vec4 norm1 = taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
-    g001 *= norm1.x;
-    g011 *= norm1.y;
-    g101 *= norm1.z;
-    g111 *= norm1.w;
+    g001 *= norm1.x; g011 *= norm1.y; g101 *= norm1.z; g111 *= norm1.w;
 
     float n000 = dot(g000, Pf0);
     float n100 = dot(g100, vec3(Pf1.x, Pf0.yz));
@@ -80,95 +74,68 @@ float cnoise(vec3 P) {
     vec3 fade_xyz = fade(Pf0);
     vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
     vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
-    float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x); 
+    float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
     return 2.2 * n_xyz;
 }
 
+// === Border blur ===
 float blurredFullBox(vec2 uv, float softness) {
-    // Distancia a los bordes
     float aspect = resolutionX / resolutionY;
     vec2 adjustedSoftness = vec2(softness / aspect, softness);
-
     float left   = smoothstep(0.0, adjustedSoftness.x, uv.x);
     float right  = smoothstep(1.0, 1.0 - adjustedSoftness.x, uv.x);
     float top    = smoothstep(0.0, adjustedSoftness.y, uv.y);
     float bottom = smoothstep(1.0, 1.0 - adjustedSoftness.y, uv.y);
-
     return left * right * top * bottom;
 }
 
-float sdCircle(vec2 uv, vec2 center, float radius) {
-     float d = length(uv - center);
-    return clamp(exp(-pow(d / radius, 2.0)),0.0,1.0);
-  
-}
-
-float intensity(float d, float radius, float softness) {
-    return smoothstep(radius, radius - softness, d);
-}
-
+// === Main ===
 void main() {
-    // Calcular la relación de aspecto de la imagen
-    float containerAspectRatio =resolutionY / resolutionX;
-    float naturalImageAspectRatio = imageResolutionY / imageResolutionX;
-    vec2 imageAspect = vec2(1.0, containerAspectRatio);
-    vec2 naturalImageAspect = vec2(1.0, naturalImageAspectRatio);
-    
-   
-    // Ajustar las coordenadas UV para mantener la relación de aspecto
     vec2 uv = vUV;
-    vec2 adjustedUV = uv * imageAspect;
-    adjustedUV = vec2(adjustedUV.x,adjustedUV.y);
-    
-   
-float boxMask =blurredFullBox(uv,boxBorderScale);
 
-    // Create noise at different scales and movement speeds
-    float scale1 = 10.5 * noiseScale; // Larger scale for main noise pattern
-    float scale2 = 20.0 * noiseScale; // Smaller scale for detail
-    
-    // Adjust X scale to be wider
-    vec2 scale1XY = vec2(scale1, scale1);
-    vec2 scale2XY = vec2(scale2, scale2);
-    
-    // Get noise value at different scales with adjusted X scale
-    float noiseVal1 = cnoise(vec3(adjustedUV * scale1XY, time * 0.4)) * 0.6;
-    float noiseVal2 = cnoise(vec3(adjustedUV * scale2XY, time * 0.15)) * 0.4;
-    
-    // Combine noise values
-    float combinedNoise = (noiseVal1 + noiseVal2) * 0.6 + 0.4;
-    
-    // Radio en coordenadas UV
-   // float d =sdCircle(uv, vec2(0.5, 0.5), 0.9);
-   // float d2= sdCircle(adjustedUV, vec2(0.45, 0.3), 0.15);
-  //  float d3= sdCircle(adjustedUV, vec2(0.6, 0.6), 0.0);
+    // === Cover logic ===
+    float containerAspect = resolutionX / resolutionY;
+    float imageAspect = imageResolutionX / imageResolutionY;
 
-   
- 
-  adjustedUV = uv * imageAspect/naturalImageAspect;
+    float scaleFactor = (imageAspect > containerAspect)
+        ? resolutionY / imageResolutionY
+        : resolutionX / imageResolutionX;
+
+    vec2 scaledImageSize = vec2(imageResolutionX, imageResolutionY) * scaleFactor;
+    vec2 offset = (vec2(resolutionX, resolutionY) - scaledImageSize) * 0.5;
+
+    vec2 pixelCoord = uv * vec2(resolutionX, resolutionY);
+    vec2 imageCoord = (pixelCoord - offset) / scaledImageSize;
+    vec2 adjustedUV = imageCoord;
+
+    
+    if (adjustedUV.x < 0.0 || adjustedUV.x > 1.0 || adjustedUV.y < 0.0 || adjustedUV.y > 1.0) {
+        discard;
+    }
+
     vec4 imageColor = texture2D(uSampler, adjustedUV);
-//clamp(d+d2+d3, 0.0, 1.0)*
-     float finalUnion = boxMask*imageColor.a; 
-    imageColor.a=1.0;
-    combinedNoise *= finalUnion;
-    //combinedNoise = finalUnion;
-    combinedNoise += finalUnion/5.0;
-    combinedNoise = smoothstep(0.14, 0.152, combinedNoise);
- 
-    // Sample the original image
-      
-  
     
-    // Mix between transparent and image color based on noise
-    if(showNoise){
-           
-        gl_FragColor = vec4(vec3(
-            finalUnion,                    // Rojo: círculo
-            combinedNoise,                    // Verde: círculo
-            combinedNoise              // Azul: ruido
-        ), 1.0);
+
+    // === Border mask ===
+    float boxMask = blurredFullBox(uv, boxBorderScale);
+
+    // === Noise generation ===
+    float scale1 = 10.5 * noiseScale;
+    float scale2 = 20.0 * noiseScale;
+    float noiseVal1 = cnoise(vec3(adjustedUV * vec2(scale1), time * 0.4)) * 0.6;
+    float noiseVal2 = cnoise(vec3(adjustedUV * vec2(scale2), time * 0.15)) * 0.4;
+    float combinedNoise = (noiseVal1 + noiseVal2) * 0.6 + 0.4;
+
+    float finalUnion = boxMask * imageColor.a;
+    imageColor.a = 1.0;
+    combinedNoise *= finalUnion;
+    combinedNoise += finalUnion / 5.0;
+    combinedNoise = smoothstep(0.14, 0.152, combinedNoise);
+
+    // === Output ===
+    if (showNoise) {
+        gl_FragColor = vec4(vec3(finalUnion, combinedNoise, combinedNoise), 1.0);
     } else {
         gl_FragColor = mix(vec4(0.0), imageColor, combinedNoise);
-       //gl_FragColor = imageColor;
     }
-} 
+}

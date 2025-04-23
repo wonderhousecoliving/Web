@@ -133,7 +133,7 @@ async function createBubbledImage(imageElement, paddingHorizontalPercent, paddin
 
         // Animation loop
         app.ticker.add((delta) => {
-            uniforms.time += delta * 0.02;
+            uniforms.time += delta * 0.03;
         });
 
 

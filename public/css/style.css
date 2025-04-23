@@ -218,8 +218,11 @@ header {
 .wonderHouse article:nth-of-type(1)  h2 {
    margin-bottom: 50px;
 }
+.wonderHouse article:nth-of-type(1)  p{
+    width: 40%;
+ }
 .wonderHouse article:nth-of-type(1) .sectionContent img {
-    width: 493px;
+    width: 100%;
     height: 300px;
 }
 
@@ -356,6 +359,12 @@ header {
 
 .Book {
     color: var(--dark);
+}
+.letsChat a{
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
 }
 
 .Footer {
