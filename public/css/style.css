@@ -129,7 +129,7 @@ header {
     max-width: 900px;
     display: flex;
     flex-direction: column;
-    margin-top: 150px;
+    margin-top: 200px;
 }
 
 .Section {
@@ -187,7 +187,7 @@ header {
 
 /* Other Sections */
 .wonderHouse {  
-    margin-top: 400px;
+    margin-top: 320px;
     color: var(--dark);
     display: flex;
     flex-direction: column;
@@ -362,7 +362,6 @@ header {
 }
 .letsChat a{
     display: block;
-    width: 100%;
     text-align: center;
     padding: 20px;
 }

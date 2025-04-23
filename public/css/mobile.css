@@ -1,6 +1,6 @@
 /* Media queries para dispositivos móviles */
 @media screen and (max-width: 768px) {
-
+   
     .menu {
     display: none;
     }
@@ -12,6 +12,15 @@
    .Section{
     padding: 5px 20px;
    }
+   #landingBackground{
+    height: 500px;
+   }
+
+   .landing .logo-container{
+    margin-top: 100px;
+}.wonderHouse{
+    margin-top: 250px;
+}
     .wonderHouse article:nth-of-type(1) .sectionContent {
     display: inline;
 }
@@ -150,10 +159,15 @@
 }
 .roomWidget .checkAvailability {
 
-    margin: 10px 2px 0px 0px;
+    margin: 10px auto;
     padding: 11px 90px;
 }
-
+.Footer{
+    padding: 0px !important;
+}
+.social-icons{
+    margin: 0px 0px 20px 0px;
+}
 .social-media{
     align-items: center;
 }
