@@ -1,6 +1,6 @@
 
 
-varying vec2 vTextureCoord;
+varying vec2 vUV;
 uniform sampler2D uSampler;
 uniform float time;
 uniform float resolutionX;
@@ -8,7 +8,7 @@ uniform float resolutionY;
 uniform float imageResolutionX;
 uniform float imageResolutionY;
 uniform float noiseScale;
-bool showNoise=true;
+bool showNoise=false;
 
 // Classic Perlin 3D Noise by Stefan Gustavson
 vec4 permute(vec4 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
@@ -106,7 +106,7 @@ void main() {
     
    
     // Ajustar las coordenadas UV para mantener la relación de aspecto
-    vec2 uv = vTextureCoord;
+    vec2 uv = vUV;
     vec2 adjustedUV = uv * imageAspect;
     adjustedUV = vec2(adjustedUV.x,adjustedUV.y);
     
@@ -126,11 +126,12 @@ void main() {
     float combinedNoise = (noiseVal1 + noiseVal2) * 0.6 + 0.4;
     
     // Radio en coordenadas UV
-    float d =sdCircle(adjustedUV, vec2(0.5, 0.5), 0.15);
+    float d =sdCircle(adjustedUV, vec2(0.5, 0.5), 0.25);
     float d2= sdCircle(adjustedUV, vec2(0.45, 0.3), 0.15);
-    float d3= sdCircle(adjustedUV, vec2(0.3, 0.7), 0.2);
+    float d3= sdCircle(adjustedUV, vec2(0.6, 0.7), 0.2);
 
-    float finalUnion = clamp(d + d2+d3, 0.0, 1.0); 
+    float finalUnion = clamp(d + d2 + d3, 0.0, 1.0); 
+ 
    //  d += sdCircle(adjustedUV, vec2(0.0, 0.0), 0.2);
     float edge = 0.6;             // Controla la suavidad del borde
     float circle =finalUnion;// smoothstep(0.55, edge, finalUnion); 
@@ -143,7 +144,7 @@ void main() {
   //  }
     
     // Sample the original image
-       imageAspect = vec2(1.0, imageAspectRatio);
+       imageAspect = vec2(1.0, 1.0);
      adjustedUV = uv * imageAspect;
     vec4 imageColor = texture2D(uSampler, adjustedUV);
     
@@ -158,5 +159,6 @@ void main() {
         gl_FragColor = vec4(debugColor, 1.0);
     } else {
         gl_FragColor = mix(vec4(0.0), imageColor, combinedNoise);
+       //gl_FragColor = imageColor;
     }
 } 
