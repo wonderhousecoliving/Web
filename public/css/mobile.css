@@ -9,7 +9,9 @@
         width: 100vw;
         max-width: 100vw;
     }
-   
+   .Section{
+    padding: 5px 20px;
+   }
     .wonderHouse article:nth-of-type(1) .sectionContent {
     display: inline;
 }
@@ -119,7 +121,10 @@
       background-color: white;
       border-radius :  0px;
     }
-
+.contact-info-container{
+   
+        margin: auto 25px;
+}
     .hsbw-grid.hsbw-grid--locations {
         display: flex;
         flex-direction: column;

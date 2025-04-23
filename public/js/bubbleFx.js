@@ -1,16 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-   
-
-    const image = document.querySelector('#wonderHouseImage1');
-    if (image) {
-        // Esperar a que la imagen cargue
+    // Find all images with BubbleFx attribute
+    const images = document.querySelectorAll('img[BubbleFx]');
+    
+    // Process each image
+    images.forEach(image => {
+        // Get padding values from attributes or use defaults
+        const paddingHorizontal = parseInt(image.getAttribute('paddingHorizontal')) || 0;
+        const paddingVertical = parseInt(image.getAttribute('paddingVertical')) || 0;
+        
+        // Apply the bubble effect
         if (image.complete) {
-            createBubbledImage(image,0,0);
+            createBubbledImage(image, paddingHorizontal, paddingVertical);
         } else {
-            image.onload = () => createBubbledImage(image,550,250);
+            image.onload = () => createBubbledImage(image, paddingHorizontal, paddingVertical);
         }
-    }
-});
+    });
+}); 
+
+
 
 async function loadShader(url) {
     try {
@@ -25,7 +32,7 @@ async function loadShader(url) {
     }
 }
 // points: array of points with x,y,radius
-async function createBubbledImage(imageElement,paddingHorizontal,paddingVertical) {
+async function createBubbledImage(imageElement, paddingHorizontalPercent, paddingVerticalPercent) {
   
     // Obtener el contenedor de la imagen
     const container = imageElement.parentNode;
@@ -38,28 +45,31 @@ async function createBubbledImage(imageElement,paddingHorizontal,paddingVertical
     const containerHeight = container.clientHeight;
     imageElement.style.opacity='0.0';
 
-   
+    // Calcular el padding en píxeles basado en porcentajes
+    const paddingHorizontal = (containerWidth * paddingHorizontalPercent) / 100;
+    const paddingVertical = (containerHeight * paddingVerticalPercent) / 100;
 
     // Create PIXI Application with transparent background
-    let appWidth = (container.clientWidth*window.devicePixelRatio)+paddingHorizontal;
-    let appHeight = (container.clientHeight*window.devicePixelRatio)+paddingVertical;
+    let appWidth = (imageElement.clientWidth*window.devicePixelRatio)+paddingHorizontal;
+    let appHeight = (imageElement.clientHeight*window.devicePixelRatio)+paddingVertical;
+    console.log("appWidth,appHeight",imageElement.naturalWidth,imageElement.naturalHeight);
     const app = new PIXI.Application({
         width:appWidth,
         height: appHeight,
         resolution: 1/window.devicePixelRatio, 
         backgroundAlpha: 0,
-        autoDensity: false
+        autoDensity: false,
     });
   
     // Configurar el canvas
     app.view.style.position = 'absolute';
     app.view.style.top = (-paddingVertical/2)+'px';
     app.view.style.left = (-paddingHorizontal/2)+'px';
-    
+    app.view.style.aspectRatio='unset';
     // app.view.style.width = (containerWidth+100)+'px';
     // app.view.style.height = (containerHeight+100)+'px';
     // app.view.style.zIndex = '1';
-   // app.view.style.backgroundColor='rgba(0,0,0,0.5)';
+  // app.view.style.backgroundColor='rgba(0,0,0,0.5)';
     
     // Insertar el canvas después de la imagen
     container.appendChild(app.view);
@@ -108,8 +118,8 @@ async function createBubbledImage(imageElement,paddingHorizontal,paddingVertical
         // Create the shader uniform values
         const uniforms = {
             time: 0.0,
-            resolutionX: 512.0,
-            resolutionY: 512.0,
+            resolutionX: appWidth,
+            resolutionY: appHeight,
             imageResolutionX: imageElement.naturalWidth,
             imageResolutionY: imageElement.naturalHeight,
             noiseScale: 0.5,
@@ -128,7 +138,7 @@ async function createBubbledImage(imageElement,paddingHorizontal,paddingVertical
 
         // Animation loop
         app.ticker.add((delta) => {
-            uniforms.time += delta * 0.01;
+            uniforms.time += delta * 0.02;
         });
 
 
@@ -150,12 +160,17 @@ async function createBubbledImage(imageElement,paddingHorizontal,paddingVertical
         updateSpriteSize(parseInt(appWidth), parseInt(appHeight));
 
         function resizeApp() {
-            app.width= container.clientWidth*window.devicePixelRatio;
-            app.height= container.clientHeight*window.devicePixelRatio;
+            // Recalcular el padding basado en el nuevo tamaño del contenedor
+            const newPaddingHorizontal = (imageElement.clientWidth * paddingHorizontalPercent) / 100;
+            const newPaddingVertical = (imageElement.clientHeight * paddingVerticalPercent) / 100;
             
-            // Solo actualizar el tamaño del canvas, no el contenido
-            //  app.view.style.width = (containerWidth-500)+'px';
-            //  app.view.style.height = (containerHeight-100)+'px';
+            app.width = (imageElement.clientWidth * window.devicePixelRatio) + newPaddingHorizontal;
+            app.height = (imageElement.clientHeight * window.devicePixelRatio) + newPaddingVertical;
+            
+            app.view.style.top = (-newPaddingVertical/2)+'px';
+            app.view.style.left = (-newPaddingHorizontal/2)+'px';
+            
+            updateSpriteSize(app.width, app.height);
         }
         //resizeApp();
         // Handle window resize

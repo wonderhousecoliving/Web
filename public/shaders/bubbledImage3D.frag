@@ -83,9 +83,17 @@ float cnoise(vec3 P) {
     return 2.2 * n_xyz;
 }
 
-float sdBox(vec2 p, vec2 size) {
-    vec2 d = abs(p) - size;
-    return length(max(d, 0.0)) + min(max(d.x, d.y), 0.0);
+float blurredFullBox(vec2 uv, float softness) {
+    // Distancia a los bordes
+    float aspect = resolutionX / resolutionY;
+    vec2 adjustedSoftness = vec2(softness / aspect, softness);
+
+    float left   = smoothstep(0.0, adjustedSoftness.x, uv.x);
+    float right  = smoothstep(1.0, 1.0 - adjustedSoftness.x, uv.x);
+    float top    = smoothstep(0.0, adjustedSoftness.y, uv.y);
+    float bottom = smoothstep(1.0, 1.0 - adjustedSoftness.y, uv.y);
+
+    return left * right * top * bottom;
 }
 
 float sdCircle(vec2 uv, vec2 center, float radius) {
@@ -100,9 +108,10 @@ float intensity(float d, float radius, float softness) {
 
 void main() {
     // Calcular la relación de aspecto de la imagen
-    float aspectRatio =resolutionY / resolutionX;
-    float imageAspectRatio = imageResolutionY / imageResolutionX;
-    vec2 imageAspect = vec2(1.0, aspectRatio);
+    float containerAspectRatio =resolutionY / resolutionX;
+    float naturalImageAspectRatio = imageResolutionY / imageResolutionX;
+    vec2 imageAspect = vec2(1.0, containerAspectRatio);
+    vec2 naturalImageAspect = vec2(1.0, naturalImageAspectRatio);
     
    
     // Ajustar las coordenadas UV para mantener la relación de aspecto
@@ -110,9 +119,12 @@ void main() {
     vec2 adjustedUV = uv * imageAspect;
     adjustedUV = vec2(adjustedUV.x,adjustedUV.y);
     
+   
+float boxMask =blurredFullBox(uv,0.2);
+
     // Create noise at different scales and movement speeds
-    float scale1 = 7.5 * noiseScale; // Larger scale for main noise pattern
-    float scale2 = 10.0 * noiseScale; // Smaller scale for detail
+    float scale1 = 10.5 * noiseScale; // Larger scale for main noise pattern
+    float scale2 = 20.0 * noiseScale; // Smaller scale for detail
     
     // Adjust X scale to be wider
     vec2 scale1XY = vec2(scale1, scale1);
@@ -126,37 +138,34 @@ void main() {
     float combinedNoise = (noiseVal1 + noiseVal2) * 0.6 + 0.4;
     
     // Radio en coordenadas UV
-    float d =sdCircle(adjustedUV, vec2(0.5, 0.5), 0.25);
+    float d =sdCircle(uv, vec2(0.5, 0.5), 0.9);
     float d2= sdCircle(adjustedUV, vec2(0.45, 0.3), 0.15);
-    float d3= sdCircle(adjustedUV, vec2(0.6, 0.7), 0.2);
+    float d3= sdCircle(adjustedUV, vec2(0.6, 0.6), 0.0);
 
-    float finalUnion = clamp(d + d2 + d3, 0.0, 1.0); 
+   
  
-   //  d += sdCircle(adjustedUV, vec2(0.0, 0.0), 0.2);
-    float edge = 0.6;             // Controla la suavidad del borde
-    float circle =finalUnion;// smoothstep(0.55, edge, finalUnion); 
-    
-    // Adjust noise to make it more contrasted and keep desired values in 0-1 range
-  //  if(!showNoise){
-        combinedNoise *= circle;
-        combinedNoise += circle/5.0;
-        combinedNoise = smoothstep(0.15, 0.152, combinedNoise);
-  //  }
-    
-    // Sample the original image
-       imageAspect = vec2(1.0, 1.0);
-     adjustedUV = uv * imageAspect;
+  adjustedUV = uv * imageAspect/naturalImageAspect;
     vec4 imageColor = texture2D(uSampler, adjustedUV);
+
+     float finalUnion = clamp(d+d2+d3, 0.0, 1.0)*boxMask*imageColor.a; 
+    imageColor.a=1.0;
+    combinedNoise *= finalUnion;
+    //combinedNoise = finalUnion;
+    combinedNoise += finalUnion/5.0;
+    combinedNoise = smoothstep(0.14, 0.152, combinedNoise);
+ 
+    // Sample the original image
+      
+  
     
     // Mix between transparent and image color based on noise
     if(showNoise){
-        // Visualización de las coordenadas UV
-        vec3 debugColor = vec3(
+           
+        gl_FragColor = vec4(vec3(
             finalUnion,                    // Rojo: círculo
             combinedNoise,                    // Verde: círculo
             combinedNoise              // Azul: ruido
-        );
-        gl_FragColor = vec4(debugColor, 1.0);
+        ), 1.0);
     } else {
         gl_FragColor = mix(vec4(0.0), imageColor, combinedNoise);
        //gl_FragColor = imageColor;
