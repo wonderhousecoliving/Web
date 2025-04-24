@@ -34,7 +34,7 @@
 
     .wonderHouse article:nth-of-type(2) .sectionContent {
         display: flex;
-        flex-direction: column-rever;
+        flex-direction: column-reverse;
         gap: var(--gapMedium);
     }
 

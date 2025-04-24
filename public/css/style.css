@@ -18,7 +18,7 @@ body {
     color: var(--dark);
     line-height: 1.6;
     font-size: 1rem;
-    /* background-image: url("imgs/PaperTextureBright.png"); */
+     background-image: url("../imgs/PaperTextureBright.png");
     background-size: 256px 256px;
 }
 
@@ -36,7 +36,7 @@ p, li, label, input, textarea, select, button {
 h1 {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
-    font-weight: 10;
+    font-weight: 100;
     letter-spacing: -0.02em;
 }
 
@@ -45,6 +45,7 @@ h2 {
     margin-bottom: 1.2rem;
     font-family: 'Pecita', sans-serif;
   text-align: center;
+  font-weight: 900;
 }
 
 h3 {
@@ -679,8 +680,9 @@ button.btn:hover {
 
 @font-face {
     font-family: 'Pecita';
-    src: url('../imgs/Pecita.otf') format('opentype');
+    src: url('../imgs/Pecita.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
