@@ -68,7 +68,7 @@ async function createLandingBackground(container) {
 
     // Create video element
     const video = document.createElement('video');
-    video.src = 'imgs/LandingVideo2.mp4';
+    video.src = 'imgs/LandingVideo.mp4';
     video.loop = true;
     video.muted = true;
     video.autoplay = true;
@@ -158,8 +158,6 @@ async function createLandingBackground(container) {
             uniforms.resolutionY = appHeight;
             uniforms.imageResolutionX = 1920;
             uniforms.imageResolutionY = 1080;
-            console.log("OnResize container size->",uniforms.resolutionX,uniforms.resolutionY);
-            console.log("OnResize image size->",uniforms.imageResolutionX,uniforms.imageResolutionY);
         }
 
         window.addEventListener('resize', resizeApp);
