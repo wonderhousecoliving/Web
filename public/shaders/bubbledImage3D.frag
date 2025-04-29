@@ -136,6 +136,7 @@ void main() {
     if (showNoise) {
         gl_FragColor = vec4(vec3(finalUnion, combinedNoise, combinedNoise), 1.0);
     } else {
-        gl_FragColor = mix(vec4(0.0), imageColor, combinedNoise);
+       
+        gl_FragColor = mix(vec4(0.0) , imageColor, combinedNoise);
     }
 }

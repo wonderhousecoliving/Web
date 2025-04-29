@@ -1,53 +1,55 @@
 // Datos de las habitaciones
 const roomsData = [
     {
-        type: "Apartments - Private bathroom",
+        type: "Private Room with private bathroom",
         name: "White Rabbit Apartment",
-        listingId: 74771,
-        description: "Private access, TV, kitchenette, sofa, ensuite bathroom.",
+        listingId: 383949,
+        description: "Super sweet room with a private bathroom. Lots of light from the window facing nature and a comfy desk to work from the room.",
         price: "1770€/Month",
         offer: "Opening offer!",
         discountedPrice: "885€/Month",
-        image: "imgs/WonderPicture1.png",
+        image: "imgs/rooms/Walrus/Walrus1.jpg",
         gallery: [
-            "imgs/WonderPicture1.png",
-            "imgs/WonderPicture0.png",
-            "imgs/WonderPicture1.png",
-            "imgs/WonderPicture1.png"
+           "imgs/rooms/Walrus/Walrus1.jpg",
+           "imgs/rooms/Walrus/Walrus2.jpg",
+            "imgs/rooms/Cat/Cat1.jpg",
+            "imgs/rooms/Cat/Cat2.jpg"
+           
         ]
     },
     {
-        type: "Private Room",
-        name: "Mad Hatter Room",
+        type: "Private Room Shared bathroom",
+        name: "Shared bathroom",
         listingId: 383946,
-        description: "Cozy private room with shared bathroom, desk, and wardrobe.",
+        description: "Spacious room with a shared bathroom. Some have access to an amazing balcony. The light from the window makes it look like Vermeer painting. No kinding.",
         price: "1200€/Month",
         offer: "Special offer! 30% off!",
         discountedPrice: "840€/Month",
-        image: "imgs/WonderPicture1.png",
+        image: "imgs/rooms/MadHatter/MadHatter1.jpg",
         gallery: [
-            "imgs/WonderPicture1.png",
-            "imgs/WonderPicture1.png",
-            "imgs/WonderPicture1.png",
-            "imgs/WonderPicture1.png"
+            "imgs/rooms/MadHatter/MadHatter1.jpg",
+            "imgs/rooms/MadHatter/MadHatter2.jpg",
+            "imgs/rooms/MadHatter/MadHatter3.jpg",
+            "imgs/rooms/QueenHearts/QueenOhHearts1.jpg",
+            "imgs/rooms/QueenHearts/QueenOhHearts2.jpg"
         ]
     },
-    {
-        type: "Shared Room",
-        name: "Cheshire Cat Room",
-        listingId: 74774,
-        description: "Comfortable shared room with bunk beds, perfect for making new friends.",
-        price: "800€/Month",
-        offer: "Special offer! 25% off!",
-        discountedPrice: "600€/Month",
-        image: "imgs/WonderPicture1.png",
-        gallery: [
-            "imgs/WonderPicture1.png",
-            "imgs/WonderPicture1.png",
-            "imgs/WonderPicture1.png",
-            "imgs/WonderPicture1.png"
-        ]
-    }
+    // {
+    //     type: "Shared Room",
+    //     name: "Cheshire Cat Room",
+    //     listingId: 74774,
+    //     description: "Comfortable shared room with bunk beds, perfect for making new friends.",
+    //     price: "800€/Month",
+    //     offer: "Special offer! 25% off!",
+    //     discountedPrice: "600€/Month",
+    //     image: "imgs/WonderPicture1.png",
+    //     gallery: [
+    //         "imgs/WonderPicture1.png",
+    //         "imgs/WonderPicture1.png",
+    //         "imgs/WonderPicture1.png",
+    //         "imgs/WonderPicture1.png"
+    //     ]
+    // }
 ];
 
 // Función para cargar la plantilla
