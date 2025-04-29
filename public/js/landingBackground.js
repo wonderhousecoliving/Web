@@ -68,7 +68,7 @@ async function createLandingBackground(container) {
 
     // Create video element
     const video = document.createElement('video');
-    video.src = '/imgs/LandingVideo.mp4';
+    video.src = 'imgs/LandingVideo.mp4';
     video.loop = true;
     video.muted = true;
     video.autoplay = true;
