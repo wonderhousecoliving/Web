@@ -25,11 +25,11 @@ const roomsData = [
         price: "1200€/Month",
         offer: "Opening offer! 30% off!",
         discountedPrice: "840€/Month",
-        image: "imgs/rooms/MadHatter/MadHatter1.jpg",
+        image: "imgs/rooms/Madhatter/MadHatter1.jpg",
         gallery: [
-            "imgs/rooms/MadHatter/MadHatter1.jpg",
-            "imgs/rooms/MadHatter/MadHatter2.jpg",
-            "imgs/rooms/MadHatter/MadHatter3.jpg",
+            "imgs/rooms/Madhatter/MadHatter1.jpg",
+            "imgs/rooms/Madhatter/MadHatter2.jpg",
+            "imgs/rooms/Madhatter/MadHatter3.jpg",
             "imgs/rooms/QueenHearts/QueenOhHearts1.jpg",
             "imgs/rooms/QueenHearts/QueenOhHearts2.jpg"
         ]
