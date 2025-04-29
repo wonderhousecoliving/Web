@@ -1,4 +1,2 @@
-# Keep only videos and PDFs in LFS
-*.mp4 filter=lfs diff=lfs merge=lfs -text
-*.mov filter=lfs diff=lfs merge=lfs -text
+# Keep only PDFs in LFS
 *.pdf filter=lfs diff=lfs merge=lfs -text
