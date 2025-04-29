@@ -5,15 +5,15 @@ const roomsData = [
         name: "White Rabbit Apartment",
         listingId: 383949,
         description: "Super sweet room with a private bathroom. Lots of light from the window facing nature and a comfy desk to work from the room.",
-        price: "1770€/Month",
-        offer: "Opening offer!",
-        discountedPrice: "885€/Month",
+        price: "1350€/Month",
+        offer: "Opening offer! 30% off!",
+        discountedPrice: "950€/Month",
         image: "imgs/rooms/Walrus/Walrus1.jpg",
         gallery: [
            "imgs/rooms/Walrus/Walrus1.jpg",
            "imgs/rooms/Walrus/Walrus2.jpg",
             "imgs/rooms/Cat/Cat1.jpg",
-            "imgs/rooms/Cat/Cat2.jpg"
+            "imgs/rooms/Alice/Alice1.jpg"
            
         ]
     },
@@ -23,7 +23,7 @@ const roomsData = [
         listingId: 383946,
         description: "Spacious room with a shared bathroom. Some have access to an amazing balcony. The light from the window makes it look like Vermeer painting. No kinding.",
         price: "1200€/Month",
-        offer: "Special offer! 30% off!",
+        offer: "Opening offer! 30% off!",
         discountedPrice: "840€/Month",
         image: "imgs/rooms/MadHatter/MadHatter1.jpg",
         gallery: [

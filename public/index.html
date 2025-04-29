@@ -3,43 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wonder House Coliving</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        .logo-container {
-            width: 200px;
-            height: auto;
-        }
-        svg {
-            width: 100%;
-            height: 100%;
-        }
-        path {
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        .fallback {
-            display: none;
-        }
-    </style>
- 
-  <script src="https://cdn.jsdelivr.net/npm/vivus@latest/dist/vivus.min.js"></script>
+    <meta name="description" content="Wonder House - A unique rural coliving space in Montseny Natural Park, just one hour from Barcelona. Experience authentic community living in a stunning natural environment.">
+    <link rel="icon" type="image/png" href="imgs/favIcon.png">
+    <title>Wonder House | Coliving in Montseny</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/mobile.css">
+    <script src="https://cdn.jsdelivr.net/npm/vivus@latest/dist/vivus.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gl-matrix@3.4.3/gl-matrix-min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.3.2/dist/pixi.min.js"></script>
+    <script src="js/menuBackground.js"></script>
+    <script src="js/landingBackground.js"></script>
     <script src="js/animation.js"></script>
+    <script src="js/bubbleFx.js"></script>
+  
+  
 </head>
 <body>
-    <div class="logo-container">
-        <object id="logo-svg" data="LineLogo.svg" type="image/svg+xml" width="200" height="200">
-            <!-- Fallback content -->
-            <img src="LineLogo.svg" alt="Wonder House Coliving" width="200" class="fallback" />
-        </object>
+    <header>
+        <nav class="menu" role="navigation" aria-label="Main navigation">
+            <div class="logo" aria-label="Wonder House Logo"></div>
+            <ul>
+                <li><a href="#home" aria-current="page">Wonder House</a></li>
+                <li><a href="#experience">The Experience</a></li>
+                <li><a href="#rooms">The Space</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a class="bookButton" href="https://wonderhouse.holidayfuture.com/all-listings">Book</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="mainContainer">
+        <section class="Section landing" aria-label="Welcome section">
+            <div id="landingBackground"></div>
+            <div class="logo-container"> 
+                <object id="logo-svg" data="imgs/LineLogoWhite.svg" type="image/svg+xml" width="200" height="200" aria-label="Wonder House Logo">
+                    <img src="imgs/LineLogoWhite.svg" alt="Wonder House Coliving" width="200" class="fallback" />
+                </object>
+            </div>
+                  </section>
+            
+        <section id="home" class="wonderHouse Section" aria-label="About Wonder House">
+            <!-- <h1>Welcome to Wonder House</h1> -->
+            <article>
+                <h2>The definitive coliving experience</h2>
+                <div class="sectionContent">
+                    <p>Just an hour from Barcelona, hidden within Montseny Natural Park, Wonder House isn't your typical co-living space, it's your new playground. Wonder House is all about spontaneous adventures, unexpected friendships, and unforgettable moments. Here, you're not just renting a room; you're joining an offbeat community that values connection, creativity, fun and the occasional trip down the rabbit hole.
+                    </p>
+                  <div>
+                     <img id="wonderHouseImage1" src="imgs/WonderPicture1.png" alt="Wonder House exterior view" loading="lazy" BubbleFx />
+                    </div> 
+                </div>
+            </article>
+            <article>
+                <h2>Less networking and more not-working</h2>
+                <div class="sectionContent">
+                    <p>At Wonder House, you can definitely get work done: there's plenty of space and quiet moments for that. But life is so much more than that. Wonder House thrives on spontaneous hikes, quirky games, themed parties you'll still talk about months later, and conversations around the bonfire that go deep into the night.
+
+                       Come for the place. Stay for the people. Leave with memories you'll never forget.</p>
+                    <img src="imgs/WonderPicture2.png" alt="People relaxing at Wonder House" loading="lazy"  BubbleFx /> 
+                </div>     
+            </article>
+            
+          
+        </section>
+        
+        <section id="experience" class="experience Section" aria-label="The Wonder House experience">
+            <h1>The experience</h1>
+            <div class="pillars">
+                <div class="pillar"><strong>Community</strong> Dive into deep conversations, join communal themed dinners, and build lasting bonds through unforgettable shared experiences.</div>
+                <div class="pillar"><strong>Balance</strong> Recharge with walks in nature, take a work call from the hammock, or simply unwind by the pool with the frogs singing in the background.</div>
+                <div class="pillar"><strong>A Dose of Madness</strong> Expect surreal activities, scary escape rooms, magic tea parties and forest raves.</div>
+            </div>
+            <h2>A peak into the wonderful life</h2>
+            <div class="lifeGallery" role="region" aria-label="Life at Wonder House">
+                <img src="imgs/Collage2.png" alt="Community dinner" loading="lazy"  BubbleFx boxBorderScale=".07"/>
+             
+            </div>
+        </section>
+       
+        <section id="rooms" class="rooms Section" aria-label="Room options">
+            <h1>The Space</h1>
+            <div class="roomsMainImage"> <img class="roomsMainImage" src="imgs/WonderPicture3.png" alt="Villa exterior" loading="lazy" BubbleFx /> 
+            </div>
+            <p>A beautifully restored 14th century rural masia with over 800m² of comfortable indoor spaces, thoughtfully designed to balance play, relaxation and productivity. Enjoy a spacious living room and dining area perfect for community meals, a coworking space with stunning mountain views, a fully equipped kitchen, and even your own cinema room for cozy movie or video game nights. Outdoors, the two barbecue areas, the stunning garden, and the refreshing natural pool. It's the perfect setting to both work effectively and truly enjoy the peaceful rhythm of life.</p>
+            <div class="wonderGallery" role="region" aria-label="Wonder House gallery">
+                <img src="imgs/Collage.png" alt="Wonder House gallery image 1" loading="lazy" BubbleFx boxBorderScale=".07" />
+            </div>
+            <h2>Search availability</h2>
+            <script src="https://d2q3n06xhbi0am.cloudfront.net/widget.js?1640277196"></script>
+            <script>
+              window.searchBar({
+                baseUrl: 'https://wonderhouse.holidayfuture.com',
+                showLocation: true,
+                color: '#cc2dcf',
+                rounded: true,
+                openInNewTab: true, // or false
+                font: 'Open Sans',
+              });
+            </script>
+            <div id="hostaway-booking-widget"></div>
+            
+            <h2 class="roomsTitle">Our rooms</h2>
+            <div id="roomsContainer">
+                
+            </div>
+          
+
+
+        </section>
+        
+        <section id="faq" class="FAQ Section" aria-label="Frequently asked questions">
+            <h1>FAQ</h1>
+            <div class="faq-item">
+                <h3>Co-living? What the heck is that?</h3>
+                <p>Think of co-living as the joyful antidote to our hyper-connected yet oddly disconnected world. It’s a lifestyle where people actually talk instead of text, cook together instead of ordering solo takeout, and swap endless scrolling for epic adventures. Basically, it's about sharing a home with amazing humans who might start as strangers but quickly become your tribe, creating friendships, memories, and maybe even a little bit of delightful chaos along the way.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>What types of rooms are available?</h3>
+                <p>We offer both private and shared rooms suitable for various budgets and stay preferences.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>Setting the Expectations</h3>
+                <p>This isn’t a hotel, it’s a living, breathing madhouse of imperfect humans, so if you use a common space, clean your mess. If the dishwasher’s screaming for help, save it. 
+
+                    Being in the countryside means you'll be vibing with bugs, frogs, and the occasional overly ambitious mosquito. Spot a mouse? Blame the local cats: they unionized, demanded better working conditions, and are currently on indefinite strike.
+                    
+                    We’ve built the ultimate playground for magic to happen, but it’s up to *you* and your fellow co-livers to bring it to life: organize wild games, sunrise hikes, karaoke battles, you name it. There will be many things happening, but you’re always free to skip a few, hide away with a book, and recharge your beautiful brain. 
+                    
+                    And if you hear unsettling sounds from the neighbor’s house? Don’t worry. It’s just part of the Wonder House folklore.</p>
+            </div>
+    
+            <div class="faq-item">
+                <h3>What does my stay at the Wonder House include?</h3>
+                <p>Your stay comes with a cozy room/bed to call your own, full access to our common spaces (perfect for spontaneous hangouts and hammock naps), daily activities to spark your spirit, endless outdoor adventures, and a fast Wi-Fi for when you *actually* need to adult. 
+
+                    We host themed communal dinners from Monday to Friday (for a small extra fee), a daily excuse to gather, feast, and connect like family. Trust us, you won't want to miss it.
+                    
+                    We’ve also got you covered with fresh bed linen, fluffy towels, toilet paper, and a stash of kitchen basics like coffee, tea, oil, and spices to fuel your creations. Laundry’s available too, for a tiny extra charge.
+                    
+                    Basically, you get everything you need to live, connect, and create some seriously unforgettable moments.</p>
+            </div>
+ 
+            <div class="faq-item">
+                <h3>How do I get to the Wonder House?</h3>
+                <p>
+                    <strong>By plane:</strong> Barcelona El Prat Airport is just 1h away by car. There's also a direct train from the airport to Hostalric (the closest village) 2-3 times a day.
+                    The closest Airport is Girona-Costa Brava Airport, which is 30 minutes away by car.
+                </p>
+                    <p>
+                        <strong>By car:</strong> just follow Google Maps: <a href="https://g.co/kgs/mjhDGdc">Wonder House Coliving</a>, we are less than 1h away from Barcelona and you can park your car at the premises. 
+                    </p>
+                    <p>
+                        <strong>By train:</strong> there are regular trains from Barcelona city center to the closest village Hostalric (approximately every 2h and the train takes 1h) and a train from Barcelona Airport to Hostalric 2-3 times a day. We will pick you up by car at the Hostalric train station, it’s a 10 min ride from there to the Wonder House. 
+                    </p>
+               
+               
+                <p>   
+                    <strong>Crawling:</strong> Lost a leg (or two) to the zombies? No problem. It'll only take you around 60 hours to crawl your way to the Wonder House. We’ll be waiting at the door armed with axes, chainsaws, and a hot cup of coffee.
+                </p>
+           
+            </div>
+ 
+            <div class="faq-item">
+                <h3>What are the working conditions?</h3>
+                <p>When duty calls (or your boss does), we've got your back: a 24/7 dedicated co-working space with ergonomic chairs and beautiful views to keep the inspiration flowing. Prefer a more laid-back vibe? You’ll find plenty of cozy nooks around the house, and even your room comes with its own desk for those "do not disturb" moments. Our Wi-Fi covers the entire house and garden, with speeds over 100 Mbps for downloads and 10–20 Mbps for uploads. And if it ever lags... just shake your fist at the sky and blame Elon Musk.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How do groceries work?</h3>
+                <p>The nearest supermarkets are just a 10-minute drive away. We organize daring grocery quests 2-3 times a week (armor optional), and if you prefer the wizardry of the internet, you can summon your supplies online right to our doorstep. For our epic communal dinners, we’ll handle the necessary ingredients, you just show up hungry and ready for the feast.</p>
+            </div>
+
+            
+            <div class="faq-item">
+                <h3>What is the minimum stay duration?</h3>
+                <p>We ask for a minimum stay of 1 month, because real connections don’t happen overnight. It gives you time to settle in, sync with the community vibe, and truly live the Wonder House experience.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is the cancellation policy?</h3>
+                <p>We ask for 30% of the total amount when you book your stay. If life throws you a curveball and you cancel more than 30 days before your arrival, no worries: you’ll get a full refund. If you decide to leave earlier once you're here, you'll be charged for the next 14 days (or less if your stay ends in less than 14 days). Why? Because in a co-living space like this, every spot matters, and sudden goodbyes leave a ripple in the community (plus, it’s hard to find a new adventurer on super short notice).</p>
+            </div>
+            <div class="faq-item">
+                <h3>What can I do around here?</h3>
+                <p>Montseny Natural Park is basically your giant backyard, packed with endless hikes, secret gorges, and if you're feeling very zen some good old-fashioned mushroom hunting. We're also just 30 minutes from the Costa Brava’s crystalline beaches, surrounded by charming villages, ancient castles, and enough medieval fairs, witch festivals, and local markets to make you wonder what century you woke up in.
+
+                    Need a city fix? Barcelona’s just an hour away and Girona is even closer at 40 minutes. Oh, and if you’re craving adrenaline: trail running, zipline parks, and via ferratas are basically calling your name. Adventure, culture, and a little bit of magic, it’s all waiting for you..</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is the minimum stay duration?</h3>
+                <p>We ask for a minimum stay of 1 month, because real connections don’t happen overnight. It gives you time to settle in, sync with the community vibe, and truly live the Wonder House experience.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Do I need a car during my stay?</h3>
+                <p>Having a car makes life easier if you want to roam free, but no wheels? No worries. Your trusty hosts have two cars on the premises, and we will make sure to take you on grocery quests, weekend escapades, and spontaneous road trips.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Do I need a car during my stay?</h3>
+                <p>Having a car makes life easier if you want to roam free, but no wheels? No worries. Your trusty hosts have two cars on the premises, and we will make sure to take you on grocery quests, weekend escapades, and spontaneous road trips.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How big is the house and the community?</h3>
+                <p>Wonder House has 9 rooms and can host up to 22 amazing humans, but usually, we’ll keep it a bit more intimate. The house itself is a massive rural masia, with enough shared spaces to lose yourself: 2 kitchens for culinary masterpieces, a 24/7 co-working zone, a cozy dining hall, a living room with a fireplace, a cinema room for late-night marathons, 2 barbecue areas, a wild garden, a natural pool for mermaid practice, a mini forest for secret missions... and a forbidden room we’ll definitely pretend doesn’t exist</p>
+            </div>
+            <div class="faq-item">
+                <h3>I don't speak any Spanish or Catalan, is that a problem?</h3>
+                <p>No problemo, amigo! English is the main language at the Wonder House, and we make sure everyone’s in the loop. If a conversation drifts into Spanish, Catalan, or Martian, we gently hit the "switch to English" button so no one gets left out.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Are pets allowed?</h3>
+                <p>Furry friends are welcome in the apartment for a small extra fee! Just a heads-up: we already have a few unofficial, self-appointed garden guardians (a.k.a. the local cats) who like to chill in the sun but politely keep their paws out of the house.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I come with children?</h3>
+                <p>Not for now (unless you’re bringing them for the ceremonial sacrifices, kidding... mostly). Wonder House is currently an adults-only playground, partly because we host some slightly wild, grown-up activities that don’t exactly scream "kid-friendly." We might revisit this policy in the future, but for now, it’s all about the adults getting to be kids again.</p>
+            </div>
+           
+                <h3>How big is the house and the community?</h3>
+                <p>Wonder House has 9 rooms and can host up to 22 amazing humans, but usually, we’ll keep it a bit more intimate. The house itself is a massive rural masia, with enough shared spaces to lose yourself: 2 kitchens for culinary masterpieces, a 24/7 co-working zone, a cozy dining hall, a living room with a fireplace, a cinema room for late-night marathons, 2 barbecue areas, a wild garden, a natural pool for mermaid practice, a mini forest for secret missions... and a forbidden room we’ll definitely pretend doesn’t exist</p>
+            </div>
+        </section>
+        <section  class="letsChat Section" aria-label="Let's chat">
+            <h2>Do you still have doubts?  Drop as a line!</h2>           
+            <p>Got questions or need more info? Send us a message on WhatsApp — it's quick, easy, and we'll get back to you right away. We're happy to help with anything you need about your stay, availability, or our activities!</p>
+            <a href="https://wa.me/0034644053987" target="_blank" aria-label="Whatsapp"><img src="imgs/WhatsAppButtonGreenLarge.svg" alt="Let's chat on WhatsApp" loading="lazy" /></a>
+            
+           
+        </section>
+       
+             
+        
+       
+    </main>
+    <footer id="contact" class="Footer Section" aria-label="Contact information">
+        <iframe
+  width="100%"
+  height="450"
+  style="border:0"
+  loading="lazy"
+  allowfullscreen
+  referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCAM5KXWVuV-oegveHVu2qDSL_75k3Eo_8
+    &q=Wonder House Coliving
+    &zoom=9
+    &center=41.5681047,2.2631208
+  ">
+</iframe>
+<div class="contact-info-container">
+        <div class="contact-info">
+            <h2>Contact Us</h2>
+            <p><strong>Email:</strong> <a href="mailto:info@wonderhousecoliving.com">info@wonderhouse.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+34644053987">+34 644 053 987</a></p>
+            <p><strong>Address:</strong> Wonder House Coliving, Montseny Natural Park, Barcelona, Spain</p>
+        </div>
+        
+        <div class="social-media">
+            <h2>Follow Us</h2>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/wonderhouse.coliving/" aria-label="Instagram"><span class="footerIcon icon-instagram"></span></a>
+                <a href="https://wa.me/0034644053987" target="_blank" aria-label="Whatsapp"><span class="footerIcon icon-whatsapp"></span></a>
+                <!-- <a href="https://telegram.com/wonderhouse" aria-label="Telegram"><span class="footerIcon icon-telegram"></span></a> -->
+            </div>
+            <div class="footer-links">
+                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="/terms-conditions">Terms & Conditions</a>
+                    
+            </div>
+        </div>
+        
+      
+        
+        
     </div>
+    <p class="footer-signature">Made by someone that would rather be in the hammock right now. 2025</p>
+
+    </footer>
+    <script src="js/roomWidget.js"></script>
+    <script src="js/hostwayIntegration.js"></script>
 </body>
-</html> 
+</html>

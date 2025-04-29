@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wonder House Coliving</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .logo-container {
+            width: 200px;
+            height: auto;
+        }
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+        path {
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .fallback {
+            display: none;
+        }
+    </style>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/vivus@latest/dist/vivus.min.js"></script>
+    <script src="js/animation.js"></script>
+</head>
+<body>
+    <div class="logo-container">
+        <object id="logo-svg" data="LineLogo.svg" type="image/svg+xml" width="200" height="200">
+            <!-- Fallback content -->
+            <img src="LineLogo.svg" alt="Wonder House Coliving" width="200" class="fallback" />
+        </object>
+    </div>
+</body>
+</html> 
