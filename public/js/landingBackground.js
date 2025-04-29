@@ -68,13 +68,25 @@ async function createLandingBackground(container) {
 
     // Create video element
     const video = document.createElement('video');
-    video.src = 'imgs/LandingVideo.mp4';
+    video.src = '/imgs/LandingVideo.mp4';
     video.loop = true;
     video.muted = true;
     video.autoplay = true;
     video.playsInline = true;
     video.preload = 'auto';
 
+    // Add error logging
+    video.addEventListener('error', (e) => {
+        console.error('Video error:', video.error);
+        console.error('Video src:', video.src);
+        console.error('Video network state:', video.networkState);
+        console.error('Video ready state:', video.readyState);
+    });
+
+    // Add loading state logging
+    video.addEventListener('loadstart', () => console.log('Video loading started'));
+    video.addEventListener('loadeddata', () => console.log('Video data loaded'));
+    video.addEventListener('canplay', () => console.log('Video can play'));
 
     // Create canvas for video
     const videoCanvas = document.createElement('canvas');
