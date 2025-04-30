@@ -112,6 +112,17 @@ async function createLandingBackground(container) {
     // Single event handler for video ready
     video.addEventListener('canplay', () => {
        
+        const svgObject = document.getElementById('logo-svg');
+    new Vivus('logo-svg', {
+        type: 'delayed',
+        duration: 500,
+        animTimingFunction: Vivus.EASE
+    });
+    setTimeout(() => {
+        const logoContainer = document.querySelector('.logo-container');
+        logoContainer.style.visibility = 'visible';
+    }, 50);
+ 
     }, { once: true });
 
     // Start video playback

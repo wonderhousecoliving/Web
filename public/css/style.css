@@ -155,7 +155,7 @@ a{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 600px;
+    height: 90vh;
     text-align: center;
     /* background-image: url("imgs/LandingBackgroundBubbles.svg"); */
     background-position: center;
@@ -173,6 +173,7 @@ a{
 }
 
 .landing .logo-container {
+    visibility: hidden;
     width: 200px;
     height: auto;
     margin: auto;
@@ -192,7 +193,7 @@ a{
 
 /* Other Sections */
 .wonderHouse {  
-    margin-top: 320px;
+    margin-top: 50vh;
     color: var(--dark);
     display: flex;
     flex-direction: column;
@@ -627,6 +628,10 @@ button.btn:hover {
     text-decoration: line-through;
     opacity: .6;
     font-weight: normal;
+}
+.roomPrice .priceContainer {
+    display: flex;
+   gap: 10px;
 }
 
 .roomDescription {
