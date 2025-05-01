@@ -34,22 +34,22 @@ const roomsData = [
             "imgs/rooms/QueenHearts/QueenOhHearts2.jpg"
         ]
     },
-    // {
-    //     type: "Shared Room",
-    //     name: "Cheshire Cat Room",
-    //     listingId: 74774,
-    //     description: "Comfortable shared room with bunk beds, perfect for making new friends.",
-    //     price: "800€/Month",
-    //     offer: "Special offer! 25% off!",
-    //     discountedPrice: "600€/Month",
-    //     image: "imgs/WonderPicture1.png",
-    //     gallery: [
-    //         "imgs/WonderPicture1.png",
-    //         "imgs/WonderPicture1.png",
-    //         "imgs/WonderPicture1.png",
-    //         "imgs/WonderPicture1.png"
-    //     ]
-    // }
+    {
+        type: "Apparment",
+        name: "Tweeddle",
+        listingId: 384402,
+        description: "Suite with a private bathroom and a separate living room, offering comfort and privacy with distinct spaces for relaxing and unwinding.",
+        price: "1800€/Month",
+        offer: "40% off! using the code: <strong>OPENING40</strong>",
+        discountedPrice: "1080€/Month",
+        image: "imgs/rooms/tweeddle/Tweeddle1.png",
+        gallery: [
+            "imgs/rooms/tweeddle/Tweeddle1.png",
+            "imgs/rooms/tweeddle/Tweeddle2.png",
+            "imgs/rooms/tweeddle/Tweeddle3.png",
+            "imgs/rooms/tweeddle/Tweeddle4.png"
+        ]
+    }
 ];
 
 // Función para cargar la plantilla
