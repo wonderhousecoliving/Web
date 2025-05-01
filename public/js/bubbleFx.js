@@ -67,6 +67,7 @@ async function createBubbledImage(imageElement, paddingHorizontalPercent, paddin
     app.view.style.top = (-paddingVertical/2)+'px';
     app.view.style.left = (-paddingHorizontal/2)+'px';
     app.view.style.aspectRatio='unset';
+    app.view.style.touchAction='unset';
 
     // Insertar el canvas después de la imagen
     container.appendChild(app.view);
