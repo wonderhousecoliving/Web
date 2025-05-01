@@ -35,7 +35,7 @@ const roomsData = [
         ]
     },
     {
-        type: "Apparment",
+        type: "Apartment",
         name: "Tweeddle",
         listingId: 384402,
         description: "Suite with a private bathroom and a separate living room, offering comfort and privacy with distinct spaces for relaxing and unwinding.",
