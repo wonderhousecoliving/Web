@@ -14,21 +14,30 @@
         padding: 5px 20px;
     }
 
-    #landingBackground {
-        height: 400px;
-    }
+    
+.landing{
+   margin: 0px;
+   height: 50vh;
+}
 
     .landing .logo-container {
         margin-top: 70px;
     }
 
     .wonderHouse {
-        margin-top: 160px;
+        margin-top: -20px;
+    }
+    .wonderHouse h2{
+        margin-top: 0px;
     }
 
     .wonderHouse article:nth-of-type(1) .sectionContent {
         display: inline;
     }
+    .wonderHouse article:nth-of-type(1) h2 {
+       margin-bottom: 24px;
+    }
+
 
     .wonderHouse article:nth-child(1) .sectionContent p {
         width: 100%;
@@ -73,8 +82,8 @@
     }
 
     .experience h2 {
-        width: 288px;
-        margin: auto;
+     /* width: 288px; */
+    margin: 60px auto 20px auto;
     }
 
     .experience .pillars .pillar strong {
@@ -98,6 +107,7 @@
 
     .experience .lifeGallery img {
         width: 100%;
+    height: fit-content;
     }
 
     .wonderGallery img:nth-of-type(1) {
@@ -147,11 +157,16 @@
         margin-top: 16px;
         position: relative;
     }
+    .roomDescription p {
+
+       display: none;
+    }
 
     .roomWidget .selectedRoomPhoto img {
         width: 100%;
         object-fit: cover;
         border-radius: 0px;
+        height: 80vh;
     }
 
     .bubbleBg {
@@ -192,12 +207,25 @@
 
     .roomWidget .selectedRoomPhoto .roomContent {
         flex-direction: column;
+        background: none;
+        backdrop-filter: none;
     }
 
     .roomWidget .checkAvailability {
 
         margin: 10px auto;
         padding: 11px 90px;
+        background: var(--accent);
+    }
+
+    .roomWidget .checkAvailability:hover {
+        background: var(--dark);
+    }
+
+    .roomWidget h3 {
+       margin:20px auto;
+       width: 100%;
+       text-align: center;
     }
 
     .Footer {
@@ -230,6 +258,6 @@
 
 h2 {
     font-family: 'Pecita', sans-serif;
-    font-size: 2.4rem;
+    font-size: 2rem;
     font-weight: normal;
 }

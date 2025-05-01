@@ -134,7 +134,7 @@ a{
     max-width: 900px;
     display: flex;
     flex-direction: column;
-    margin-top: 200px;
+ 
 }
 
 .Section {
@@ -147,15 +147,15 @@ a{
 
 /* Landing Section */
 .landing {
+    position: relative;
+    padding: 0px;
+    margin: 70px 0px 0px 0px;
     width: 100vw;
-    position: absolute;
-    left: 0px;
-    top: 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 70vh;
     text-align: center;
     /* background-image: url("imgs/LandingBackgroundBubbles.svg"); */
     background-position: center;
@@ -175,7 +175,7 @@ a{
 .landing .logo-container {
     visibility: hidden;
     width: 200px;
-    height: auto;
+   
     margin: auto;
     position: relative;
     top:0px;
@@ -193,16 +193,20 @@ a{
 
 /* Other Sections */
 .wonderHouse {  
-    margin-top: 50vh;
     color: var(--dark);
     display: flex;
     flex-direction: column;
     gap: 30px;
+    padding-top: 0px;
 }
 
 .wonderHouse p{
     width: auto;
     margin: 0px;
+}
+
+.wonderHouse h2{
+   margin-top: -20px;
 }
 
 .wonderHouse img{
@@ -717,3 +721,7 @@ button.btn:hover {
     font-display: swap;
 }
 
+.hizofY {
+    /* height: 392px; */
+    border-radius: 0.8rem;
+}
