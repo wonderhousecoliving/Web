@@ -721,7 +721,18 @@ button.btn:hover {
     font-display: swap;
 }
 
+/* Contenedor de la habitación de hostaway */
 .hizofY {
     /* height: 392px; */
     border-radius: 0.8rem;
+}
+
+/* Menu de hostaway */
+.jRNpdy {
+    position: relative;
+    z-index: 1046;
+    background-color: unset;
+    box-shadow: none;
+    /* background-color: rgb(255, 255, 255); */
+    /* box-shadow: rgba(0, 0, 0, 0.08) 0px 0.125rem 0.75rem;*/
 }
