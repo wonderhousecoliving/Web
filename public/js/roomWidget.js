@@ -18,7 +18,7 @@ const roomsData = [
         ]
     },
     {
-        type: "Private Room Shared bathroom",
+        type: "Private Room with shared bathroom",
         name: "Shared bathroom",
         listingId: 383946,
         description: "Spacious room with a shared bathroom. Some have access to an amazing balcony. The light from the window makes it look like Vermeer painting. No kinding.",
@@ -35,7 +35,7 @@ const roomsData = [
         ]
     },
     {
-        type: "Apartment",
+        type: "Suite with private bathroom",
         name: "Tweeddle",
         listingId: 384402,
         description: "Suite with a private bathroom and a separate living room, offering comfort and privacy with distinct spaces for relaxing and unwinding.",

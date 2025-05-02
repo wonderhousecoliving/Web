@@ -17,11 +17,11 @@
     
 .landing{
    margin: 0px;
-   height: 50vh;
+   height: 60vh;
 }
 
     .landing .logo-container {
-        margin-top: 70px;
+        margin-top: auto;
     }
 
     .wonderHouse {
