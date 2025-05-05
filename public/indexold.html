@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<style>
+    body {
+        background-color: #000;
+    }
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+</style>
+<body>
+    <h1>Hello World</h1>
+    <section class="logo-container" aria-label="Welcome section">
+        <div id="landingBackground"></div>
+        <div class="logo-container">
+            <object id="logo-svg" data="imgs/LineLogoWhite.svg" type="image/svg+xml" width="200" height="200"
+                aria-label="Wonder House Logo">
+                <img src="imgs/LineLogoWhite.svg" alt="Wonder House Coliving" width="200" class="fallback" />
+            </object>
+        </div>
+    </section>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vivus@latest/dist/vivus.min.js"></script>
+<script>
+    const logoContainer = document.querySelector('.logo-container');
+    const svgObject = document.getElementById('logo-svg');
+    new Vivus('logo-svg', {
+        type: 'delayed',
+        duration: 500,
+        animTimingFunction: Vivus.EASE
+    });
+</script>
+</html>
+
