@@ -1,4 +1,6 @@
+require('dotenv').config();
 const express = require('express');
+const { Client } = require('@notionhq/client');
 const path = require('path');
 
 const app = express();
@@ -18,6 +20,50 @@ app.use((req, res, next) => {
 // Route to serve amongus.html
 app.get('/amongus', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'amongus.html'));
+});
+
+// Inicializa el cliente de Notion
+const notion = new Client({ auth: process.env.NOTION_TOKEN }); 
+
+// Nuevo endpoint para obtener los datos de Notion usando el SDK oficial
+app.get('/api/notion-rooms', async (req, res) => {
+    try {
+        const databaseId = process.env.NOTION_DATABASE_ID;
+        const response = await notion.databases.query({
+            database_id: databaseId
+        });
+
+        // Transforma la respuesta de Notion a un array limpio
+        const rooms = response.results.map(page => {
+            const props = page.properties;
+            // Extraer todas las URLs de la propiedad files
+            const gallery = props.pics?.files?.map(fileObj => {
+                if (fileObj.type === 'file') return fileObj.file.url;
+                if (fileObj.type === 'external') return fileObj.external.url;
+                return null;
+            }).filter(Boolean);
+         
+            console.log(JSON.stringify(response));
+            return {
+                id: page.id,
+                name: props.name?.title?.[0]?.plain_text || '',
+                type: props.type?.select?.name || '',
+                price: props.price?.number || 0,
+                discountPercentage: props.discountPercentage?.number || 0,
+                description: props.description?.rich_text?.[0]?.plain_text || '',
+                listingId: props.listingId?.number || '',
+                isTaken: props.isTaken?.checkbox || false,
+                couponCode: props.couponCode?.rich_text?.[0]?.plain_text || '',
+                showOnWebsite: props.showOnWebsite?.checkbox || false,
+                gallery // <--- array de URLs de imágenes
+            };
+        });
+
+        res.json(rooms);
+    } catch (error) {
+        console.error('Notion API error:', error.body || error.message);
+        res.status(500).json({ error: error.body || error.message });
+    }
 });
 
 // Add a catch-all route to log 404s

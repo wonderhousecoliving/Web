@@ -1,13 +1,31 @@
 // Datos de las habitaciones
-const roomsData = [
+var roomsData = [
+    {
+        type: "Shared Room",
+        name: "Oisters",
+        listingId: 384404,
+        description: "",
+        showOnWebsite: false,
+        couponCode: "OPENING40",
+        price: 1800,
+        discountPercentage: 0.4,
+        image: "imgs/rooms/tweeddle/Tweeddle1.png",
+        gallery: [
+            "imgs/rooms/tweeddle/Tweeddle1.png",
+            "imgs/rooms/tweeddle/Tweeddle2.png",
+            "imgs/rooms/tweeddle/Tweeddle3.png",
+            "imgs/rooms/tweeddle/Tweeddle4.png"
+        ]
+    },
     {
         type: "Private Room with private bathroom",
         name: "White Rabbit Apartment",
         listingId: 383949,
         description: "Super sweet room with a private bathroom. Lots of light from the window facing nature and a comfy desk to work from the room.",
-        price: "1350€/Month",
-        offer: "40% off! using the code: <strong>OPENING40</strong>",
-        discountedPrice: "810€/Month",
+        showOnWebsite: true,
+        couponCode: "OPENING40",
+        price: 1350,
+        discountPercentage: 0.4,
         image: "imgs/rooms/Walrus/Walrus1.jpg",
         gallery: [
            "imgs/rooms/Walrus/Walrus1.jpg",
@@ -22,9 +40,10 @@ const roomsData = [
         name: "Shared bathroom",
         listingId: 383946,
         description: "Spacious room with a shared bathroom. Some have access to an amazing balcony. The light from the window makes it look like Vermeer painting. No kinding.",
-        price: "1200€/Month",
-        offer: "40% off! using the code: <strong>OPENING40</strong>",
-        discountedPrice: "720€/Month",
+        showOnWebsite: true,
+        couponCode: "OPENING40",
+        price: 1200,
+        discountPercentage: 0.4,
         image: "imgs/rooms/Madhatter/MadHatter1.jpg",
         gallery: [
             "imgs/rooms/Madhatter/MadHatter1.jpg",
@@ -39,9 +58,10 @@ const roomsData = [
         name: "Tweeddle",
         listingId: 384402,
         description: "Suite with a private bathroom and a separate living room, offering comfort and privacy with distinct spaces for relaxing and unwinding.",
-        price: "1800€/Month",
-        offer: "40% off! using the code: <strong>OPENING40</strong>",
-        discountedPrice: "1080€/Month",
+        showOnWebsite: true,
+        couponCode: "OPENING40",
+        price: 1800,
+        discountPercentage: 0.4,
         image: "imgs/rooms/tweeddle/Tweeddle1.png",
         gallery: [
             "imgs/rooms/tweeddle/Tweeddle1.png",
@@ -69,15 +89,19 @@ async function loadRoomTemplate() {
 // Función para renderizar una habitación
 function renderRoom(roomData, template) {
     let html = template;
-    
+    let discountedPrice = roomData.price * (1 - roomData.discountPercentage);
+    let offer = "";
+    if (discountedPrice < roomData.price) {
+        offer = roomData.discountPercentage*100+"% off! with code: <strong>"+roomData.couponCode+"</strong>";
+    }
     // Reemplazar los placeholders con los datos reales
     html = html.replace('{{type}}', roomData.type);
     html = html.replace('{{name}}', roomData.name);
     html = html.replace('{{description}}', roomData.description);
-    html = html.replace('{{price}}', roomData.price);
-    html = html.replace('{{offer}}', roomData.offer);
-    html = html.replace('{{discountedPrice}}', roomData.discountedPrice);
-    html = html.replace('{{image}}', roomData.image);
+    html = html.replace('{{price}}', roomData.price+"€/Month");
+    html = html.replace('{{offer}}', offer);
+    html = html.replace('{{discountedPrice}}', discountedPrice+"€/Month");
+    html = html.replace('{{image}}', roomData.gallery[0]);
     html = html.replace('{{listingId}}', roomData.listingId);
     return html;
 }
@@ -101,9 +125,19 @@ function initGallery(roomWidget, roomData) {
         }
     });
 }
-
+async function fetchNotionRooms() {
+    const res = await fetch('/api/notion-rooms');
+    if (!res.ok) {
+        throw new Error('Error fetching Notion data: ' + res.status);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
+}
 // Función principal para cargar y renderizar todas las habitaciones
 async function loadAndRenderRooms() {
+    roomsData = await fetchNotionRooms();
+    console.log(JSON.stringify(roomsData));
     const template = await loadRoomTemplate();
     if (!template) return;
 
@@ -112,6 +146,7 @@ async function loadAndRenderRooms() {
 
     // Renderizar cada habitación
     roomsData.forEach(roomData => {
+        if (roomData.showOnWebsite) {
         const roomHtml = renderRoom(roomData, template);
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = roomHtml;
@@ -121,9 +156,11 @@ async function loadAndRenderRooms() {
         initGallery(roomWidget, roomData);
         
         roomsContainer.appendChild(roomWidget);
-        
+        }
     });
 }
+
+
 
 // Cargar las habitaciones cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', loadAndRenderRooms); 
