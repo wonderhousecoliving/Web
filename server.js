@@ -22,10 +22,8 @@ app.get('/amongus', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'amongus.html'));
 });
 
-// Inicializa el cliente de Notion
 const notion = new Client({ auth: process.env.NOTION_TOKEN }); 
 
-// Nuevo endpoint para obtener los datos de Notion usando el SDK oficial
 app.get('/api/notion-rooms', async (req, res) => {
     try {
         const databaseId = process.env.NOTION_DATABASE_ID;
@@ -33,10 +31,8 @@ app.get('/api/notion-rooms', async (req, res) => {
             database_id: databaseId
         });
 
-        // Transforma la respuesta de Notion a un array limpio
         const rooms = response.results.map(page => {
             const props = page.properties;
-            // Extraer todas las URLs de la propiedad files
             const gallery = props.pics?.files?.map(fileObj => {
                 if (fileObj.type === 'file') return fileObj.file.url;
                 if (fileObj.type === 'external') return fileObj.external.url;
@@ -55,7 +51,7 @@ app.get('/api/notion-rooms', async (req, res) => {
                 isTaken: props.isTaken?.checkbox || false,
                 couponCode: props.couponCode?.rich_text?.[0]?.plain_text || '',
                 showOnWebsite: props.showOnWebsite?.checkbox || false,
-                gallery // <--- array de URLs de imágenes
+                gallery 
             };
         });
 
