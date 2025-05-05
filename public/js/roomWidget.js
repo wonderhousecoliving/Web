@@ -89,7 +89,7 @@ async function loadRoomTemplate() {
 // Función para renderizar una habitación
 function renderRoom(roomData, template) {
     let html = template;
-    let discountedPrice = roomData.price * (1 - roomData.discountPercentage);
+    let discountedPrice = Math.floor(roomData.price * (1 - roomData.discountPercentage));
     let offer = "";
     if (discountedPrice < roomData.price) {
         offer = roomData.discountPercentage*100+"% off! with code: <strong>"+roomData.couponCode+"</strong>";
