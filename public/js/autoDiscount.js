@@ -3,9 +3,10 @@
 console.log("autoDiscount.js loaded");
 document.addEventListener('DOMContentLoaded', () => {
     if (window.location.href.toLowerCase().includes('checkout')) {
-        // Espera a que el input esté en el DOM (por si se carga dinámicamente)
+        console.log("we are in checkout");
         const fillDiscount = () => {
             const input = document.querySelector('input[placeholder="Discount"]');
+            console.log("input is", input);
             if (input) {
                 input.value = 'TEST01';
                 // Si quieres disparar un evento de input para frameworks/reactividad:
