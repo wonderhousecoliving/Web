@@ -4,6 +4,24 @@
     .menu {
         display: none;
     }
+    .PhoneMenu {
+        display: block !important;
+        margin:10px ;
+    }
+    .PhoneMenu a{
+        width: fit-content;
+        display: block;
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        height: fit-content;
+        /* text-align: center; */
+        margin: auto;
+        text-transform: uppercase;
+        font-weight: 200;
+        font-size: .85rem;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
 
     .mainContainer {
         width: 100vw;

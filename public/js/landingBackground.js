@@ -25,6 +25,7 @@ async function createLandingBackground(container) {
     app.view.style.left = '0';
     app.view.style.zIndex = '1';
     app.view.style.aspectRatio = 'unset !important';
+    app.view.style.touchAction='unset';
 
     let rectWidth = appWidth;
     let rectHeight = appHeight;
