@@ -92,7 +92,7 @@ function renderRoom(roomData, template) {
     let discountedPrice = Math.floor(roomData.price * (1 - roomData.discountPercentage));
     let offer = "";
     if (discountedPrice < roomData.price) {
-        offer = roomData.discountPercentage*100+"% off! with code: <strong>"+roomData.couponCode+"</strong>";
+        offer = roomData.discountPercentage*100+"% off with code: <strong>"+roomData.couponCode+"</strong>";
     }
     // Reemplazar los placeholders con los datos reales
     html = html.replace('{{type}}', roomData.type);
