@@ -85,6 +85,19 @@ async function loadRoomTemplate() {
         return null;
     }
 }
+async function loadRoomForbidenTemplate() {
+    try {
+        const response = await fetch('templates/forbidenRoom.html');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const text = await response.text();
+        return text;
+    } catch (error) {
+        console.error('Error loading template:', error);
+        return null;
+    }
+}
 
 // Función para renderizar una habitación
 function renderRoom(roomData, template) {
@@ -134,15 +147,69 @@ async function fetchNotionRooms() {
     console.log(data);
     return data;
 }
+
+function setHTMLWithScripts(container, htmlString, { clear = true } = {}) {
+    if (clear) container.innerHTML = ''; // Limpia el contenedor si se desea
+  
+    const temp = document.createElement('div');
+    temp.innerHTML = htmlString;
+  
+    // Recorre y reubica cada nodo, ejecutando scripts
+    Array.from(temp.childNodes).forEach(node => {
+      if (node.nodeName === 'SCRIPT') {
+        const newScript = document.createElement('script');
+  
+        // Copia todos los atributos del script original
+        Array.from(node.attributes).forEach(attr => {
+          newScript.setAttribute(attr.name, attr.value);
+        });
+  
+        // Copia el contenido del script (si es inline)
+        newScript.textContent = node.textContent;
+  
+        container.appendChild(newScript);
+      } else {
+        container.appendChild(node);
+      }
+    });
+  }
+
+  async function showForbiddenRoom() {
+    const forbidenTemplate = await loadRoomForbidenTemplate();
+    if (!forbidenTemplate) return;
+
+    const forbDiv = document.createElement('div');
+    forbDiv.id = "forbidenRoom";
+    forbDiv.style.width = "100%";
+    forbDiv.style.height = "500px";
+    
+    setHTMLWithScripts(forbDiv, forbidenTemplate);
+    const roomsContainer = document.getElementById('roomsContainer');
+    if (!roomsContainer) return;
+    roomsContainer.appendChild(forbDiv);
+
+    // Esperar a que el script se ejecute
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
+    // Verificar que la función existe antes de llamarla
+    if (typeof window.initForbiddenRoomWebGL === 'function') {
+        window.initForbiddenRoomWebGL();
+    } else {
+        console.error('initForbiddenRoomWebGL function not found');
+    }
+}
 // Función principal para cargar y renderizar todas las habitaciones
 async function loadAndRenderRooms() {
+   
+
     roomsData = await fetchNotionRooms();
     console.log(JSON.stringify(roomsData));
     const template = await loadRoomTemplate();
     if (!template) return;
 
-    const roomsContainer = document.getElementById('roomsContainer');
-    if (!roomsContainer) return;
+   
+
+    
 
     // Renderizar cada habitación
     roomsData.forEach(roomData => {
@@ -158,6 +225,11 @@ async function loadAndRenderRooms() {
         roomsContainer.appendChild(roomWidget);
         }
     });
+
+    if (Math.random() < 1) {
+        await showForbiddenRoom();
+        return;
+    }
 }
 
 

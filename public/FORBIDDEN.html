@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            overflow: hidden;
+          
+        }
+        #errorText {
+            color: rgb(255, 255, 255);
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="errorText"></div>
+    <script>
+        const errorText = document.getElementById('errorText');
+        // Solo caracteres especiales y símbolos raros
+        const symbols = '⌘⌥⇧⇪⌃⌅⌆⌇⌈⌉⌊⌋⌌⌍⌎⌏⌐⌑⌒⌓⌔⌕⌖⌗⌘⌙⌜⌝⌞⌟⌠⌡⌢⌣⌤⌥⌦⌧⌨〈〉⌫⌬⌭⌮⌯⌰⌱⌲⌳⌴⌵⌶⌷⌸⌹⌺⌻⌼⌽⌾⌿⍀⍁⍂⍃⍄⍅⍆⍇⍈⍉⍊⍋⍌⍍⍎⍏⍐⍑⍒⍓⍔⍕⍖⍗⍘⍙⍚⍛⍜⍝⍞⍟⍠⍡⍢⍣⍤⍥⍦⍧⍨⍩⍪⍫⍬⍭⍮⍯⍰⍱⍲⍳⍴⍵⍶⍷⍸⍹⍺⍻⍼⍽⍾⍿⎀⎁⎂⎃⎄⎅⎆⎇⎈⎉⎊⎋⎌⎍⎎⎏⎐⎑⎒⎓⎔⎕⎖⎗⎘⎙⎚⎛⎜⎝⎞⎟⎠⎡⎢⎣⎤⎥⎦⎧⎨⎩⎪⎫⎬⎭⎮⎯⎰⎱⎲⎳⎴⎵⎶⎷⎸⎹⎺⎻⎼⎽⎾⎿⏀⏁⏂⏃⏄⏅⏆⏇⏈⏉⏊⏋⏌⏍⏎⏏⏐⏑⏒⏓⏔⏕⏖⏗⏘⏙⏚⏛⏜⏝⏞⏟⏠⏡⏢⏣⏤⏥⏦⏧⏨⏭⏮⏯⏱⏲⏴⏵⏶⏷⏸⏹⏺⏻⏼⏽⏾⏿';
+        const forbiddenMessage = "  -  WOOꓤ SIHꓕ ƎƎS ꓕ'NⱯƆ ꓵO⅄ -  ";
+        
+        // Calculate initial layout
+        const lineHeight = 38;
+        const numLines = Math.floor(window.innerHeight / lineHeight);
+        const symbolWidth = 32;
+        const symbolsPerLine = Math.floor(window.innerWidth / symbolWidth);
+        
+        // Create initial grid of symbols
+        let grid = Array(numLines).fill().map(() => 
+            Array(symbolsPerLine).fill().map(() => 
+                symbols[Math.floor(Math.random() * symbols.length)]
+            )
+        );
+        
+        function getRandomSymbol() {
+            return symbols[Math.floor(Math.random() * symbols.length)];
+        }
+
+        function updateText() {
+            let errorString = "";
+            // 3% chance to show the forbidden message
+            for (let i = 0; i < 15; i++) {
+                // Change 5 random symbols
+                for (let i = 0; i < 15; i++) {
+                    const line = Math.floor(Math.random() * numLines);
+                    const col = Math.floor(Math.random() * symbolsPerLine);
+                    grid[line][col] = getRandomSymbol();
+                }
+                
+                // Convert grid to text
+                const text = grid.map(line => line.join('')).join('\n');
+                errorString  += forbiddenMessage+ text ;
+            }
+            errorText.textContent =errorString;
+        }
+
+        // Update every 200ms
+        setInterval(updateText, 30);
+        // Initial update
+        updateText();
+        
+        // Update on window resize
+        window.addEventListener('resize', () => {
+            const newNumLines = Math.floor(window.innerHeight / lineHeight);
+            const newSymbolsPerLine = Math.floor(window.innerWidth / symbolWidth);
+            
+            // Adjust grid size if needed
+            if (newNumLines !== numLines || newSymbolsPerLine !== symbolsPerLine) {
+                grid = Array(newNumLines).fill().map(() => 
+                    Array(newSymbolsPerLine).fill().map(() => 
+                        getRandomSymbol()
+                    )
+                );
+            }
+        });
+    </script>
+</body>
+</html> 
