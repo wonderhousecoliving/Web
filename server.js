@@ -2,12 +2,21 @@ require('dotenv').config();
 const express = require('express');
 const { Client } = require('@notionhq/client');
 const path = require('path');
+const HostawayClient = require('./src/clients/HostawayClient.js');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Serve static files from the public directory with absolute path
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Initialize clients
+// const hostaway = new HostawayClient({
+//     clientId: process.env.HOSTAWAY_CLIENT_ID,
+//     clientSecret: process.env.HOSTAWAY_CLIENT_SECRET
+// });
+
 
 // Add MIME types explicitly
 app.use((req, res, next) => {
@@ -62,6 +71,19 @@ app.get('/api/notion-rooms', async (req, res) => {
     }
 });
 
+// Hostaway API routes
+app.get('/api/listings', async (req, res) => {
+    try {
+        const listings = await hostaway.getListings();
+        res.json(listings);
+    } catch (error) {
+        console.error('Error fetching listings:', error);
+        res.status(500).json({ error: 'Failed to fetch listings' });
+    }
+});
+
+
+
 // Add a catch-all route to log 404s
 app.use((req, res, next) => {
     console.log('404 Not Found:', req.method, req.url);
@@ -78,4 +100,4 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     console.log('Static files being served from:', path.join(__dirname, 'public'));
-}); 
+});

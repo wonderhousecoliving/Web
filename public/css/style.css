@@ -713,6 +713,15 @@ button.btn:hover {
     border-color: var(--accent) !important;
 }
 
+.stay-duration-error {
+    background-color: #ea6767;
+    color: #ffffff;
+    text-align: center;
+    padding: 12px 12px;
+    border-radius: 25px;
+    min-width: fit-content;
+}
+
 @font-face {
     font-family: 'Pecita';
     src: url('../imgs/Pecita.woff2') format('woff2');
