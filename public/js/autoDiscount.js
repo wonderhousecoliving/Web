@@ -9,8 +9,8 @@ function check30DaysStay(){
         errorMessage.textContent = 'Minimum stay is 30 days';
     }
 
-    let elementClass ="sc-e50ef021-3 hftQFy";
-    let element = document.querySelector(`.${elementClass}`);
+    
+    let element = document.querySelector(`.sc-e50ef021-3`);
     if (element) {
         console.log("element found");
         element.parentNode.insertBefore(errorMessage, element.nextSibling);
