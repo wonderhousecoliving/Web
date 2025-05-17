@@ -2,7 +2,7 @@
 // Si la URL contiene 'checkout', rellena el input de descuento automáticamente
 console.log("autoDiscount.js loaded");
 
-function check3BanDaysStay(){
+function check30DaysStay(){
     let errorMessage = document.querySelector('.stay-duration-error');
     if (!errorMessage) {
         errorMessage = document.createElement('div');
@@ -14,28 +14,15 @@ function check3BanDaysStay(){
     if (element) {
         console.log("element found");
         element.parentNode.insertBefore(errorMessage, element.nextSibling);
+        // Si encontramos el elemento, detenemos el intervalo
+        clearInterval(checkInterval);
     } else {
         console.log("element not found");
     }
 }
 
-// Configurar el observer para detectar cambios en el DOM
-const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-        if (mutation.addedNodes.length) {
-            check3BanDaysStay();
-        }
-    }
-});
-
-// Iniciar la observación del documento
-observer.observe(document.body, {
-    childList: true,
-    subtree: true
-});
-
 // Verificación inicial
-check3BanDaysStay();
+check30DaysStay();
 
-// Verificación periódica cada 2 segundos
-setInterval(check3BanDaysStay, 2000);
+// Verificar cada 5 segundos hasta encontrar el elemento
+const checkInterval = setInterval(check30DaysStay, 5000);
