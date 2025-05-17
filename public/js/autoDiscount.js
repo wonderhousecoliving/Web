@@ -11,13 +11,13 @@ function check30DaysStay(){
     }
 
     let element = document.querySelector(`.sc-e50ef021-3`);
-    if (element) {
-        console.log("element found");
+    if (element && element.textContent.trim() === 'No results') {
+        console.log("element found with 'No results'");
         element.parentNode.insertBefore(errorMessage, element.nextSibling);
         // Si encontramos el elemento, detenemos el intervalo
         clearInterval(checkInterval);
     } else {
-        console.log("element not found");
+        console.log("element not found or doesn't contain 'No results'");
     }
 }
 
@@ -25,4 +25,4 @@ function check30DaysStay(){
 check30DaysStay();
 
 // Verificar cada 5 segundos hasta encontrar el elemento
-const checkInterval = setInterval(check30DaysStay, 5000);
+const checkInterval = setInterval(check30DaysStay, 1000);
