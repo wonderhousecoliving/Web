@@ -181,7 +181,6 @@ function setHTMLWithScripts(container, htmlString, { clear = true } = {}) {
     const forbDiv = document.createElement('div');
     forbDiv.id = "forbidenRoom";
     forbDiv.style.width = "100%";
-    forbDiv.style.height = "500px";
     
     setHTMLWithScripts(forbDiv, forbidenTemplate);
     const roomsContainer = document.getElementById('roomsContainer');
@@ -226,7 +225,7 @@ async function loadAndRenderRooms() {
         }
     });
 
-    if (Math.random() < 0.1) {
+    if (Math.random() < .2) {
         await showForbiddenRoom();
         return;
     }

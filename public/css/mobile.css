@@ -4,11 +4,13 @@
     .menu {
         display: none;
     }
+
     .PhoneMenu {
         display: block !important;
-        margin:10px ;
+        margin: 10px;
     }
-    .PhoneMenu a{
+
+    .PhoneMenu a {
         width: fit-content;
         display: block;
         color: white;
@@ -32,11 +34,11 @@
         padding: 5px 20px;
     }
 
-    
-.landing{
-   margin: 0px;
-   height: 60vh;
-}
+
+    .landing {
+        margin: 0px;
+        height: 60vh;
+    }
 
     .landing .logo-container {
         margin-top: auto;
@@ -45,15 +47,17 @@
     .wonderHouse {
         margin-top: -20px;
     }
-    .wonderHouse h2{
+
+    .wonderHouse h2 {
         margin-top: 0px;
     }
 
     .wonderHouse article:nth-of-type(1) .sectionContent {
         display: inline;
     }
+
     .wonderHouse article:nth-of-type(1) h2 {
-       margin-bottom: 24px;
+        margin-bottom: 24px;
     }
 
 
@@ -100,8 +104,8 @@
     }
 
     .experience h2 {
-     /* width: 288px; */
-    margin: 60px auto 20px auto;
+        /* width: 288px; */
+        margin: 60px auto 20px auto;
     }
 
     .experience .pillars .pillar strong {
@@ -125,7 +129,7 @@
 
     .experience .lifeGallery img {
         width: 100%;
-    height: fit-content;
+        height: fit-content;
     }
 
     .wonderGallery img:nth-of-type(1) {
@@ -175,9 +179,10 @@
         margin-top: 16px;
         position: relative;
     }
+
     .roomDescription p {
 
-       display: none;
+        display: none;
     }
 
     .roomWidget .selectedRoomPhoto img {
@@ -241,9 +246,9 @@
     }
 
     .roomWidget h3 {
-       margin:20px auto;
-       width: 100%;
-       text-align: center;
+        margin: 20px auto;
+        width: 100%;
+        text-align: center;
     }
 
     .Footer {
@@ -272,10 +277,14 @@
         margin-left: 0px;
     }
 
-    .hsbw-calendar{
-       top: 70px !important;
+    .hsbw-calendar {
+        top: 70px !important;
     }
 
+    #forbidenRoom .checkAvailability {
+        padding: 17px 40px;
+
+    }
 }
 
 h2 {
