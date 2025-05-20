@@ -713,6 +713,8 @@ button.btn:hover {
     border-color: var(--accent) !important;
 }
 
+
+
 .stay-duration-error {
     background-color: #ea6767;
     color: #ffffff;
