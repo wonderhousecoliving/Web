@@ -65,11 +65,14 @@ async function loadAndDisplayDiscounts() {
         if (discounts.length > 0) {
             console.log("Discounts found");
             let discount = discounts[0];
-           
+           if(discount.percent > 0){
             bannerDiv.innerHTML = `
             ${Math.round(discount.percent * 100)}% OFF Coupon! <strong>${discount.name}<strong>
                 
             `;
+           }else{
+            bannerDiv.style.display = 'none';
+           }
         }else{
             console.log("No discounts found");
         }
