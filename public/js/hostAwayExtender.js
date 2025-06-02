@@ -32,24 +32,27 @@ check30DaysStay();
 const checkInterval = setInterval(check30DaysStay, 1000);
 
 async function loadAndDisplayDiscounts() {
-    if (bannerChecked) {
-        console.log("Banner already checked, skipping");
-        return;
-    }
-    bannerChecked = true;
     console.log("Loading and displaying discounts");
+    if (!bannerChecked) {
+        const bannerDiv = document.querySelector('.hostAwayBanner');
+        if (!bannerDiv) {
+            console.error('hostAwayBanner div not found');
+            return;
+        }else{
+            console.log("hostAwayBanner div found");
+            bannerChecked = true;
+        }
+        
+    }
     try {
         const response = await fetch('/api/notion-discounts');
         if (!response.ok) {
             throw new Error('Failed to fetch discounts');
         }
+        console.log("grabbing discounts");
         const discounts = await response.json();
+        console.log("discounts", discounts);
         
-        const bannerDiv = document.querySelector('.hostAwayBanner');
-        if (!bannerDiv) {
-            console.error('hostAwayBanner div not found');
-            return;
-        }
 
         // Clear existing content
         bannerDiv.innerHTML = '';
