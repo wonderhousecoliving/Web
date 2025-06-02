@@ -103,17 +103,28 @@ async function loadRoomForbidenTemplate() {
 function renderRoom(roomData, template) {
     let html = template;
     let discountedPrice = Math.floor(roomData.price * (1 - roomData.discountPercentage));
-    let offer = "";
-    if (discountedPrice < roomData.price) {
-        offer = roomData.discountPercentage*100+"% off with code: <strong>"+roomData.couponCode+"</strong>";
+    let offerText = "";
+    let widgetClass = ''; // Clase adicional para el widget principal
+
+    if (roomData.discountPercentage > 0) {
+        offerText = roomData.discountPercentage * 100 + "% off with code: <strong>" + roomData.couponCode + "</strong>";
+        widgetClass = 'has-discount'; // Añadir clase si hay descuento
+        // Remove the oldPrice element from the template
+      
+    } else {
+        // Si no hay descuento, el precio con descuento es el precio original
+        html = html.replace(/<div class="oldPrice">.*?<\/div>/s, '');
+        discountedPrice = roomData.price;
     }
+
     // Reemplazar los placeholders con los datos reales
+    html = html.replace('{{widgetClass}}', widgetClass); // Añadir la clase al HTML
     html = html.replace('{{type}}', roomData.type);
     html = html.replace('{{name}}', roomData.name);
     html = html.replace('{{description}}', roomData.description);
-    html = html.replace('{{price}}', roomData.price+"€/Month");
-    html = html.replace('{{offer}}', offer);
-    html = html.replace('{{discountedPrice}}', discountedPrice+"€/Month");
+    html = html.replace('{{price}}', roomData.price + "€/Month");
+    html = html.replace('{{offer}}', offerText);
+    html = html.replace('{{discountedPrice}}', discountedPrice + "€/Month");
     html = html.replace('{{image}}', roomData.gallery[0]);
     html = html.replace('{{listingId}}', roomData.listingId);
     return html;
