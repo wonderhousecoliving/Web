@@ -32,17 +32,23 @@ check30DaysStay();
 const checkInterval = setInterval(check30DaysStay, 1000);
 
 async function loadAndDisplayDiscounts() {
-    console.log("Discounts loader");
+    console.log("Discounts loader:", bannerChecked);
+    let bannerDiv = document.querySelector('.hostAwayBanner');
+
     if (!bannerChecked) {
-        const bannerDiv = document.querySelector('.hostAwayBanner');
+        let bannerDiv = document.querySelector('.hostAwayBanner');
         if (!bannerDiv) {
-          
             return;
         }else{
             bannerChecked = true;
         }
-        
+    } 
+    else{
+        console.log("Banner already checked, skipping");
+        return;
     }
+
+    bannerDiv = document.querySelector('.hostAwayBanner');
     console.log("Loading and displaying discounts");
     try {
         const response = await fetch('https://www.wonderhousecoliving.com/api/notion-discounts');
