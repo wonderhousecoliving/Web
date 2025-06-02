@@ -66,9 +66,8 @@ async function loadAndDisplayDiscounts() {
         if (discounts.length > 0) {
             console.log("Discounts found");
             let discount = discounts[0];
-            let discountElement = document.createElement('div');
-            discountElement.className = 'discount-item';
-            discountElement.innerHTML = `
+           
+            bannerDiv.innerHTML = `
                 <h3>${discount.name}</h3>
                 <p>${Math.round(discount.percent * 100)}% OFF</p>
             `;
