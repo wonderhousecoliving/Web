@@ -56,7 +56,7 @@ app.get('/api/notion-rooms', async (req, res) => {
                 return null;
             }).filter(Boolean);
          
-            console.log(JSON.stringify(response));
+           
             return {
                 id: page.id,
                 name: props.name?.title?.[0]?.plain_text || '',

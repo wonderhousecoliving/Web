@@ -68,8 +68,8 @@ async function loadAndDisplayDiscounts() {
             let discount = discounts[0];
            
             bannerDiv.innerHTML = `
-                <h3>${discount.name}</h3>
-                <p>${Math.round(discount.percent * 100)}% OFF</p>
+            ${Math.round(discount.percent * 100)}% OFF Coupon! <strong>${discount.name}<strong>
+                
             `;
         }else{
             console.log("No discounts found");
