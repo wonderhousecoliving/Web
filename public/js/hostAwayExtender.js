@@ -32,7 +32,7 @@ check30DaysStay();
 const checkInterval = setInterval(check30DaysStay, 1000);
 
 async function loadAndDisplayDiscounts() {
-    console.log("Discounts loader:", bannerChecked);
+ 
     let bannerDiv = document.querySelector('.hostAwayBanner');
 
     if (!bannerChecked) {
@@ -43,8 +43,7 @@ async function loadAndDisplayDiscounts() {
             bannerChecked = true;
         }
     } 
-    else{
-        console.log("Banner already checked, skipping");
+    else{       
         return;
     }
 
