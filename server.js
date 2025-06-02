@@ -71,6 +71,29 @@ app.get('/api/notion-rooms', async (req, res) => {
     }
 });
 
+app.get('/api/notion-discounts', async (req, res) => {
+    try {
+        const databaseId = '20624c6a516a805590a1e942567916a2';
+        const response = await notion.databases.query({
+            database_id: databaseId
+        });
+
+        const discounts = response.results.map(page => {
+            const props = page.properties;
+            return {
+                id: page.id,
+                name: props.Name?.title?.[0]?.plain_text || '',
+                percent: props.Percent?.number || 0
+            };
+        });
+
+        res.json(discounts);
+    } catch (error) {
+        console.error('Notion API error:', error.body || error.message);
+        res.status(500).json({ error: error.body || error.message });
+    }
+});
+
 // Hostaway API routes
 app.get('/api/listings', async (req, res) => {
     try {
