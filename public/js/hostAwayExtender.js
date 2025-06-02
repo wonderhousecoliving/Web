@@ -1,8 +1,10 @@
 // public/js/autoDiscount.js
 // Si la URL contiene 'checkout', rellena el input de descuento automáticamente
 console.log("autoDiscount.js loaded");
+let bannerChecked = false;
 
 function check30DaysStay(){
+    loadAndDisplayDiscounts();
     // Primero verificamos si ya existe un mensaje de error
     let existingErrorMessage = document.querySelector('.stay-duration-error');
     if (existingErrorMessage) {
@@ -30,6 +32,11 @@ check30DaysStay();
 const checkInterval = setInterval(check30DaysStay, 1000);
 
 async function loadAndDisplayDiscounts() {
+    if (bannerChecked) {
+        console.log("Banner already checked, skipping");
+        return;
+    }
+    bannerChecked = true;
     console.log("Loading and displaying discounts");
     try {
         const response = await fetch('/api/notion-discounts');

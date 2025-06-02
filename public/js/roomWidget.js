@@ -213,13 +213,13 @@ async function loadAndRenderRooms() {
    
 
     roomsData = await fetchNotionRooms();
-    console.log(JSON.stringify(roomsData));
+   // console.log(JSON.stringify(roomsData));
     const template = await loadRoomTemplate();
     if (!template) return;
 
-   
-
-    
+    //sort roomsData by order
+    console.log("roomsData before sorting");
+    roomsData.sort((a, b) => a.order - b.order);
 
     // Renderizar cada habitación
     roomsData.forEach(roomData => {

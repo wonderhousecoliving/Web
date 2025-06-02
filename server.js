@@ -54,6 +54,7 @@ app.get('/api/notion-rooms', async (req, res) => {
                 name: props.name?.title?.[0]?.plain_text || '',
                 type: props.type?.select?.name || '',
                 price: props.price?.number || 0,
+                order: props.order?.number || 0,
                 discountPercentage: props.discountPercentage?.number || 0,
                 description: props.description?.rich_text?.[0]?.plain_text || '',
                 listingId: props.listingId?.number || '',
