@@ -48,6 +48,7 @@ async function loadAndDisplayDiscounts() {
         bannerDiv.innerHTML = '';
 
         if (discounts.length > 0) {
+            console.log("Discounts found");
             let discount = discounts[0];
             let discountElement = document.createElement('div');
             discountElement.className = 'discount-item';
@@ -55,6 +56,8 @@ async function loadAndDisplayDiscounts() {
                 <h3>${discount.name}</h3>
                 <p>${Math.round(discount.percent * 100)}% OFF</p>
             `;
+        }else{
+            console.log("No discounts found");
         }
        
     } catch (error) {
@@ -64,6 +67,6 @@ async function loadAndDisplayDiscounts() {
 
 // Call the function when the DOM is loaded
 document.addEventListener('DOMContentLoaded', loadAndDisplayDiscounts);
-
+loadAndDisplayDiscounts();
 
 
