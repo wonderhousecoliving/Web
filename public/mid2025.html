@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1QMQDFM4V9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-1QMQDFM4V9');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="keywords" content="rural coliving, coliving Barcelona, coliving Montseny, conscious community, coliving Catalonia, rural coworking, conscious community Spain, digital nomads Spain, slow living Barcelona">
+    <meta name="robots" content="index, follow">
+    <meta name="title" content="Wonder House | Rural Coliving near Barcelona">
+
+    <meta name="description"
+        content="Wonder House - A unique rural coliving space in Montseny Natural Park, just one hour from Barcelona. Experience authentic community living in a stunning natural environment.">
+
+    <title>Wonder House | Coliving in Montseny</title>
+    <link rel="icon" type="image/png" href="imgs/favIcon.png">
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Wonder House | Coliving in Montseny">
+    <meta property="og:description"
+        content="A unique rural coliving space in Montseny Natural Park, near Barcelona. Experience authentic community living in a stunning natural environment.">
+    <meta property="og:image" content="https://wonderhousecoliving.com/imgs/WonderPicture1.png">
+    <meta property="og:url" content="https://wonderhousecoliving.com">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Wonder House | Rural Coliving in Barcelona">
+    <meta name="twitter:description"
+        content="A unique rural coliving space in Montseny Natural Park, near Barcelona. Join our offbeat, connected community.">
+    <meta name="twitter:image" content="https://wonderhousecoliving.com/imgs/WonderPicture1.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bellota:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lexend+Deca:wght@100..900&family=Vibur&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/mobile.css">
+    <link rel="stylesheet" type="text/css" href="css/midsommar.css">
+
+    <style>
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+         
+            padding: 10px;
+          
+        }
+
+        .language-selector button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: transform 0.2s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .language-selector button:hover {
+            transform: scale(1.1);
+        }
+
+       
+        @media (max-width: 768px) {
+            .language-selector {
+                top: 10px;
+                right: 10px;
+                padding: 8px;
+                gap: 8px;
+            }
+
+            .language-selector button {
+                width: 35px;
+                height: 35px;
+                font-size: 20px;
+            }
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/vivus@latest/dist/vivus.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/gl-matrix@3.4.3/gl-matrix-min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.3.2/dist/pixi.min.js"></script>
+    <script src="js/menuBackground.js"></script>
+    <script src="js/landingBackground.js"></script>
+    <script src="js/bubbleFx.js"></script>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "LodgingBusiness",
+          "name": "Wonder House Coliving",
+          "description": "Wonder House is a unique rural coliving space located in Montseny Natural Park, near Barcelona. A magical place for community, work, and unforgettable adventures.",
+          "image": "https://wonderhousecoliving.com/imgs/previewImage.png",
+          "url": "https://wonderhousecoliving.com/",
+          "telephone": "+34 644 053 987",
+          "email": "info@wonderhousecoliving.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Urbanitzacio Rio Park, 14, 17451 Sant Feliu de Buixalleu",
+            "addressRegion": "Barcelona",
+            "addressCountry": "Spain"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 41.5681047,
+            "longitude": 2.2631208
+          },
+          "sameAs": [
+            "https://www.instagram.com/wonderhouse.coliving/",
+            "https://wa.me/0034644053987"
+          ]
+        }
+        </script>
+</head>
+
+<body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button onclick="setLanguage('es')" id="lang-es" class="active" title="Español">🇪🇸</button>
+        <button onclick="setLanguage('en')" id="lang-en" title="English">🇬🇧</button>
+        <button onclick="setLanguage('ca')" id="lang-ca" title="Català">🏴󠁥󠁳󠁣󠁴󠁿</button>
+    </div>
+
+    <header>
+        <nav class="menu" role="navigation" aria-label="Main navigation">
+            <div class="logo" aria-label="Wonder House Logo"></div>
+            <!-- <ul>
+                <li><a href="#home" aria-current="page">Wonder House</a></li>
+                <li><a href="#experience">The Experience</a></li>
+                <li><a href="#rooms">The Space</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a class="bookButton" href="https://book.wonderhousecoliving.com/all-listings">Book</a></li>
+            </ul> -->
+        </nav>
+    
+    </header>
+  
+    <main class="mainContainer">
+        <div class="midsommarLogo"></div>
+
+        <section class="Section">
+            <h2 data-i18n="title">Fiesta pagana</h2>
+            <p data-i18n="description">Una noche de rituales, juegos paganos y cuerpos en trance.
+                Trae tu alma, tu sed y tu magia.</p>
+        </section>
+
+        <section class="Section">
+            <h2 data-i18n="date">Sábado 22 de junio</h2>
+            <p data-i18n="time">Desde las 18h<br/>hasta que se nos olvide el nombre.</p>
+        </section>
+        <img src="imgs/midsommar/flower2.png" class="separator"/>
+        <section class="Section">
+            <h2 data-i18n="metamorphosis">Metamorfosis</h2>
+            <p data-i18n="metamorphosis-desc">Hoy no eres Marta ni Pablo. Eres "Lengua de Sauce", "Guardián del Lúpulo" o "Sombra del Alba".</p>
+            <div class="metamorfosis">
+                <a href="https://uk.pinterest.com/lunacyberlin/midsummer-dreaming-house-of-lunacy/" target="_blank">
+                    <img src="imgs/midsommar/midSommarExample3.png" alt="Metamorfosis">
+                </a>
+                <a href="https://uk.pinterest.com/lunacyberlin/midsummer-dreaming-house-of-lunacy/" target="_blank">
+                    <img src="imgs/midsommar/midSommarExample2.png" alt="Metamorfosis">
+                </a>
+                <a href="https://uk.pinterest.com/lunacyberlin/midsummer-dreaming-house-of-lunacy/" target="_blank">
+                    <img src="imgs/midsommar/midSommarExample1.png" alt="Metamorfosis">
+                </a>
+            </div>
+            <p data-i18n="become">Busca tu nuevo ser. Conviértete.</p>
+        </section>
+        <img src="imgs/midsommar/flower3.png" class="separator"/>
+        <section class="Section">
+            <h2 data-i18n="activities">Actividades</h2>
+            <ul>
+               <li data-i18n="activity1">Ritual del Atardecer</li>
+                <li data-i18n="activity2">Danza al rededor del fuego</li>
+                <li data-i18n="activity3">Altar de intenciones</li>
+                <li data-i18n="activity4">Oraculo</li>
+                <li data-i18n="activity5">Danza tribal</li>
+                <li data-i18n="activity6">Humming</li>
+                <li data-i18n="activity7">Juegos del Bosque</li>
+            </ul>
+        </section>
+        <img src="imgs/midsommar/flower1.png" class="separator"/>
+        <section class="Section">
+            <h2 data-i18n="disclaimer">Disclaimer</h2>
+            <p data-i18n="disclaimer1">El evento es gratuito, pero se agradecen las contribuciones en especie, en metálico o en bendiciones.</p>
+            <p data-i18n="disclaimer2">Ven disfrazado o ven convertido. No se permite ropa de oficina ni almas sin flor.</p>
+            <p data-i18n="disclaimer3">No nos hacemos responsables del uso de sustancias mágicas, psicodélicas ni fermentadas. Cada quien gestiona su viaje.</p>
+            <p data-i18n="disclaimer4">Por favor, contacta antes de venir para confirmar que hay sitio. El bosque no es infinito.</p>
+            <p data-i18n="disclaimer5">Nada de móviles (excepto para selfies místicos)</p>
+            <p data-i18n="disclaimer6">Consentimiento antes de invocar, abrazar o hiperventilar juntos.</p>
+        </section>
+
+        <section class="letsChat Section" aria-label="Let's chat">
+            <h2 data-i18n="contact-title">Do you still have doubts? Drop as a line!</h2>
+            <p data-i18n="contact-desc">Got questions or need more info? Send us a message on WhatsApp — it's quick, easy, and we'll get back to
+                you right away. We're happy to help with anything you need about your stay, availability, or our
+                activities!</p>
+            <a href="https://wa.me/+34644053987" target="_blank" aria-label="Whatsapp"><img
+                    src="imgs/WhatsAppButtonGreenLarge.svg" alt="Let's chat on WhatsApp" loading="lazy" /></a>
+        </section>
+
+    </main>
+    <footer id="contact" class="Footer Section" aria-label="Contact information">
+        <iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCAM5KXWVuV-oegveHVu2qDSL_75k3Eo_8
+    &q=place_id:ChIJEUee0TovuxIRDGHXxLiB1hA&zoom=9&center=41.5681047,2.2631208
+  ">
+        </iframe>
+        <div class="contact-info-container">
+            <div class="contact-info">
+                <h2 data-i18n="contact-us">Contact Us</h2>
+                <p><strong data-i18n="email">Email:</strong> <a
+                        href="mailto:hello@wonderhousecoliving.com">hello@wonderhousecoliving.com</a></p>
+                <p><strong data-i18n="phone">Phone:</strong> <a href="tel:+34644053987">+34 644 053 987</a></p>
+                <p><strong data-i18n="address">Address:</strong> <span data-i18n="address-text">Wonder House Coliving, Urbanitzacio Rio Park, 14, 17451 Sant Feliu de
+                    Buixalleu, Girona, Spain</span></p>
+            </div>
+
+            <div class="social-media">
+                <h2 data-i18n="follow-us">Follow Us</h2>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/wonderhouse.coliving/" aria-label="Instagram"><span
+                            class="footerIcon icon-instagram"></span></a>
+                    <a href="https://wa.me/+34644053987" target="_blank" aria-label="Whatsapp"><span
+                            class="footerIcon icon-whatsapp"></span></a>
+                    <!-- <a href="https://telegram.com/wonderhouse" aria-label="Telegram"><span class="footerIcon icon-telegram"></span></a> -->
+                </div>
+                <!-- <div class="footer-links">
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/terms-conditions">Terms & Conditions</a>
+
+                </div> -->
+            </div>
+
+
+
+
+        </div>
+        <p class="footer-signature" data-i18n="footer-signature">Made by someone that would rather be in the hammock right now. 2025</p>
+
+    </footer>
+
+    <script>
+        // Translations object
+        const translations = {
+            es: {
+                'title': 'Fiesta pagana',
+                'description': 'Una noche de rituales, juegos paganos y cuerpos en trance. Trae tu alma, tu sed y tu magia.',
+                'date': 'Sábado 22 de junio',
+                'time': 'Desde las 18h<br/>hasta que se nos olvide el nombre.',
+                'metamorphosis': 'Metamorfosis',
+                'metamorphosis-desc': 'Hoy no eres Marta ni Pablo. Eres "Lengua de Sauce", "Guardián del Lúpulo" o "Sombra del Alba".',
+                'become': 'Busca tu nuevo ser. Conviértete.',
+                'activities': 'Actividades',
+                'activity1': 'Ritual del Atardecer',
+                'activity2': 'Danza al rededor del fuego',
+                'activity3': 'Altar de intenciones',
+                'activity4': 'Oráculo',
+                'activity5': 'Danza tribal',
+                'activity6': 'Humming',
+                'activity7': 'Juegos del Bosque',
+                'disclaimer': 'Disclaimer',
+                'disclaimer1': 'El evento es gratuito, pero se agradecen las contribuciones en especie, en metálico o en bendiciones.',
+                'disclaimer2': 'Ven disfrazado o ven convertido. No se permite ropa de oficina ni almas sin flor.',
+                'disclaimer3': 'No nos hacemos responsables del uso de sustancias mágicas, psicodélicas ni fermentadas. Cada quien gestiona su viaje.',
+                'disclaimer4': 'Por favor, contacta antes de venir para confirmar que hay sitio. El bosque no es infinito.',
+                'disclaimer5': 'Nada de móviles (excepto para selfies místicos)',
+                'disclaimer6': 'Consentimiento antes de invocar, abrazar o hiperventilar juntos.',
+                'contact-title': '¿Aún tienes dudas? ¡Escríbenos!',
+                'contact-desc': '¿Tienes preguntas o necesitas más información? Envíanos un mensaje por WhatsApp: es rápido, fácil y te responderemos enseguida. ¡Estaremos encantados de ayudarte con todo lo que necesites sobre tu estancia, disponibilidad o nuestras actividades!',
+                'contact-us': 'Contáctanos',
+                'email': 'Email:',
+                'phone': 'Teléfono:',
+                'address': 'Dirección:',
+                'address-text': 'Wonder House Coliving, Urbanitzacio Rio Park, 14, 17451 Sant Feliu de Buixalleu, Girona, España',
+                'follow-us': 'Síguenos',
+                'footer-signature': 'Hecho por alguien que preferiría estar en la hamaca ahora mismo. 2025'
+            },
+            en: {
+                'title': 'Pagan Festival',
+                'description': 'A night of rituals, pagan games and bodies in trance. Bring your soul, your thirst and your magic.',
+                'date': 'Saturday June 22nd',
+                'time': 'From 6pm<br/>until we forget our names.',
+                'metamorphosis': 'Metamorphosis',
+                'metamorphosis-desc': 'Today you\'re not Marta or Pablo. You are "Willow Tongue", "Hops Guardian" or "Dawn Shadow".',
+                'become': 'Find your new being. Transform.',
+                'activities': 'Activities',
+                'activity1': 'Sunset Ritual',
+                'activity2': 'Fire Circle Dance',
+                'activity3': 'Intentions Altar',
+                'activity4': 'Oracle',
+                'activity5': 'Tribal Dance',
+                'activity6': 'Humming',
+                'activity7': 'Forest Games',
+                'disclaimer': 'Disclaimer',
+                'disclaimer1': 'The event is free, but contributions in kind, cash or blessings are appreciated.',
+                'disclaimer2': 'Come in costume or come transformed. No office clothes or souls without flowers allowed.',
+                'disclaimer3': 'We are not responsible for the use of magical, psychedelic or fermented substances. Everyone manages their own journey.',
+                'disclaimer4': 'Please contact before coming to confirm there\'s space. The forest is not infinite.',
+                'disclaimer5': 'No mobile phones (except for mystical selfies)',
+                'disclaimer6': 'Consent before invoking, hugging or hyperventilating together.',
+                'contact-title': 'Do you still have doubts? Drop us a line!',
+                'contact-desc': 'Got questions or need more info? Send us a message on WhatsApp — it\'s quick, easy, and we\'ll get back to you right away. We\'re happy to help with anything you need about your stay, availability, or our activities!',
+                'contact-us': 'Contact Us',
+                'email': 'Email:',
+                'phone': 'Phone:',
+                'address': 'Address:',
+                'address-text': 'Wonder House Coliving, Urbanitzacio Rio Park, 14, 17451 Sant Feliu de Buixalleu, Girona, Spain',
+                'follow-us': 'Follow Us',
+                'footer-signature': 'Made by someone that would rather be in the hammock right now. 2025'
+            },
+            ca: {
+                'title': 'Festa pagana',
+                'description': 'Una nit de rituals, jocs pagans i cossos en trànsit. Porta la teva ànima, la teva set i la teva màgia.',
+                'date': 'Dissabte 22 de juny',
+                'time': 'Des de les 18h<br/>fins que oblidem el nostre nom.',
+                'metamorphosis': 'Metamorfosi',
+                'metamorphosis-desc': 'Avui no ets Marta ni Pablo. Ets "Llengua de Salze", "Guardià del Llúpol" o "Ombra de l\'Alba".',
+                'become': 'Busca el teu nou ser. Converteix-te.',
+                'activities': 'Activitats',
+                'activity1': 'Ritual del Capvespre',
+                'activity2': 'Dansa al voltant del foc',
+                'activity3': 'Altar d\'intencions',
+                'activity4': 'Oracle',
+                'activity5': 'Dansa tribal',
+                'activity6': 'Humming',
+                'activity7': 'Jocs del Bosc',
+                'disclaimer': 'Disclaimer',
+                'disclaimer1': 'L\'esdeveniment és gratuït, però s\'agraeixen les contribucions en espècie, en metàl·lic o en benediccions.',
+                'disclaimer2': 'Vine disfressat o vine convertit. No es permet roba d\'oficina ni ànimes sense flor.',
+                'disclaimer3': 'No ens fem responsables de l\'ús de substàncies màgiques, psicològiques ni fermentades. Cadascú gestiona el seu viatge.',
+                'disclaimer4': 'Si us plau, contacta abans de venir per confirmar que hi ha lloc. El bosc no és infinit.',
+                'disclaimer5': 'Res de mòbils (excepte per selfies místics)',
+                'disclaimer6': 'Consentiment abans d\'invocar, abraçar o hiperventilar junts.',
+                'contact-title': 'Encara tens dubtes? Escriu-nos!',
+                'contact-desc': 'Tens preguntes o necessites més informació? Envia\'ns un missatge per WhatsApp: és ràpid, fàcil i et respondrem de seguida. Estarem encantats d\'ajudar-te amb tot el que necessitis sobre la teva estada, disponibilitat o les nostres activitats!',
+                'contact-us': 'Contacta\'ns',
+                'email': 'Email:',
+                'phone': 'Telèfon:',
+                'address': 'Adreça:',
+                'address-text': 'Wonder House Coliving, Urbanitzacio Rio Park, 14, 17451 Sant Feliu de Buixalleu, Girona, Espanya',
+                'follow-us': 'Segueix-nos',
+                'footer-signature': 'Fet per algú que preferiria estar a l\'hamaca ara mateix. 2025'
+            }
+        };
+
+        // Current language
+        let currentLanguage = 'es';
+
+        // Function to set language
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            
+            // Update active button
+            document.querySelectorAll('.language-selector button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`lang-${lang}`).classList.add('active');
+            
+            // Update all translatable elements
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+            
+            // Save preference
+            localStorage.setItem('midsommar-language', lang);
+        }
+
+        // Load saved language preference on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('midsommar-language') || 'es';
+            setLanguage(savedLang);
+        });
+    </script>
+</body>
+
+</html>

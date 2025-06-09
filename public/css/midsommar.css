@@ -1,0 +1,68 @@
+h2{
+
+   color: black;
+}
+p{
+    text-align: center;
+}
+li{
+    text-align: center;
+    list-style-type: none;
+    margin-bottom: 30px;
+}
+ul{
+    padding-inline-start: 0px;
+}
+body{
+    font-family: 'Vibur', sans-serif;
+    background-color: #fdf2da;
+    background-image: unset;
+}   
+.separator{
+    margin: 50px auto;
+    width:35%;
+}
+.metamorfosis{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.metamorfosis img{
+    width: 100px;
+ 
+    object-fit: cover;
+}
+
+.midsommarLogo {
+    background-image: url(../imgs/midsommar/logo.jpg);
+    background-color: #fdf2da;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    position: absolute;
+    top: 75px;
+    left: 0;
+    height: 1000px;
+    z-index: -1000;
+}
+
+@media screen and (max-width: 768px) {
+    .menu {
+        display: block;
+       
+    }
+    .menu .logo {
+        width: 100%;
+      
+    }
+    .mainContainer {
+        width: unset;
+        padding: 0px 30px;
+     color: #776827;
+        font-size: 25px;
+        margin-top: 241px;
+    }
+
+}
