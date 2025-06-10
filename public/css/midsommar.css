@@ -3,6 +3,11 @@ h2{
    color: black;
    font-size: 36px;
 }
+h3{
+    font-family: 'Vibur', sans-serif;
+    color: black;
+    font-size: 34px;
+}
 p{
     text-align: center;
 }
