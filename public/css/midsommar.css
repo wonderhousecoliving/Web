@@ -34,8 +34,9 @@ body{
 }
 .separator{
     margin: 50px auto;
-    width:35%;
-    height: fit-content;
+    width: 35%;
+    /* height: auto; */
+    object-fit: contain;
 }
 .metamorfosis{
     display: flex;
@@ -48,18 +49,19 @@ body{
  
     object-fit: cover;
 }
-
+.contact-info-container h2{
+   color: white;
+}
 .midsommarLogo {
-    background-image: url(../imgs/midsommar/logo.jpg);
-    background-color: #fdf2da;
+ 
     background-size: cover;
-    background-position: center;
+    background-position: top;
     background-repeat: no-repeat;
     width: 100%;
+    margin: 0px;
     position: absolute;
-    top: 393px;
+    top: 303px;
     left: 0;
-    height: 1000px;
     z-index: -1000;
 }
 
@@ -131,3 +133,4 @@ body{
         height: 35px;
         font-size: 20px;
 
+    }
