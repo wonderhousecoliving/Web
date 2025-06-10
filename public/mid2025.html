@@ -47,55 +47,6 @@
     <link rel="stylesheet" type="text/css" href="css/mobile.css">
     <link rel="stylesheet" type="text/css" href="css/midsommar.css">
 
-    <style>
-        .language-selector {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            display: flex;
-            gap: 10px;
-         
-            padding: 10px;
-          
-        }
-
-        .language-selector button {
-            border: none;
-            background: none;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 50%;
-            transition: transform 0.2s ease;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .language-selector button:hover {
-            transform: scale(1.1);
-        }
-
-       
-        @media (max-width: 768px) {
-            .language-selector {
-                top: 10px;
-                right: 10px;
-                padding: 8px;
-                gap: 8px;
-            }
-
-            .language-selector button {
-                width: 35px;
-                height: 35px;
-                font-size: 20px;
-            }
-        }
-    </style>
-
     <script src="https://cdn.jsdelivr.net/npm/vivus@latest/dist/vivus.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/gl-matrix@3.4.3/gl-matrix-min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.3.2/dist/pixi.min.js"></script>
@@ -136,27 +87,30 @@
 <body>
     <!-- Language Selector -->
     <div class="language-selector">
-        <button onclick="setLanguage('es')" id="lang-es" class="active" title="Español">🇪🇸</button>
-        <button onclick="setLanguage('en')" id="lang-en" title="English">🇬🇧</button>
-        <button onclick="setLanguage('ca')" id="lang-ca" title="Català">🏴󠁥󠁳󠁣󠁴󠁿</button>
+        <button onclick="setLanguage('es')" id="lang-es" class="active" title="Español">
+            <img src="https://flagcdn.com/w40/es.png" alt="Español" loading="lazy">
+        </button>
+        <button onclick="setLanguage('en')" id="lang-en" title="English">
+            <img src="https://flagcdn.com/w40/gb.png" alt="English" loading="lazy">
+        </button>
+        <button onclick="setLanguage('ca')" id="lang-ca" title="Català">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Catalonia.svg/40px-Flag_of_Catalonia.svg.png" alt="Català" loading="lazy">
+        </button>
     </div>
 
     <header>
-        <nav class="menu" role="navigation" aria-label="Main navigation">
+        <!-- <nav class="menu" role="navigation" aria-label="Main navigation">
             <div class="logo" aria-label="Wonder House Logo"></div>
-            <!-- <ul>
-                <li><a href="#home" aria-current="page">Wonder House</a></li>
-                <li><a href="#experience">The Experience</a></li>
-                <li><a href="#rooms">The Space</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a class="bookButton" href="https://book.wonderhousecoliving.com/all-listings">Book</a></li>
-            </ul> -->
-        </nav>
+          
+        </nav>  
+    -->
     
     </header>
-  
+   
     <main class="mainContainer">
+        <div class="bannerContainer">
+            <img src="imgs/midsommar/banner.png"  />
+        </div>
         <div class="midsommarLogo"></div>
 
         <section class="Section">
@@ -186,6 +140,8 @@
             </div>
             <p data-i18n="become">Busca tu nuevo ser. Conviértete.</p>
         </section>
+        <img src="imgs/midsommar/PhotoBooth2.png" class="photo" />
+
         <img src="imgs/midsommar/flower3.png" class="separator"/>
         <section class="Section">
             <h2 data-i18n="activities">Actividades</h2>
@@ -199,17 +155,24 @@
                 <li data-i18n="activity7">Juegos del Bosque</li>
             </ul>
         </section>
+        <img src="imgs/midsommar/PhotoBooth3.png" class="photo" />
         <img src="imgs/midsommar/flower1.png" class="separator"/>
         <section class="Section">
             <h2 data-i18n="disclaimer">Disclaimer</h2>
+            <br/>
             <p data-i18n="disclaimer1">El evento es gratuito, pero se agradecen las contribuciones en especie, en metálico o en bendiciones.</p>
+        <br/>
             <p data-i18n="disclaimer2">Ven disfrazado o ven convertido. No se permite ropa de oficina ni almas sin flor.</p>
+        <br/>
             <p data-i18n="disclaimer3">No nos hacemos responsables del uso de sustancias mágicas, psicodélicas ni fermentadas. Cada quien gestiona su viaje.</p>
+        <br/>
             <p data-i18n="disclaimer4">Por favor, contacta antes de venir para confirmar que hay sitio. El bosque no es infinito.</p>
+        <br/>
             <p data-i18n="disclaimer5">Nada de móviles (excepto para selfies místicos)</p>
+        <br/>
             <p data-i18n="disclaimer6">Consentimiento antes de invocar, abrazar o hiperventilar juntos.</p>
         </section>
-
+<br/>
         <section class="letsChat Section" aria-label="Let's chat">
             <h2 data-i18n="contact-title">Do you still have doubts? Drop as a line!</h2>
             <p data-i18n="contact-desc">Got questions or need more info? Send us a message on WhatsApp — it's quick, easy, and we'll get back to
@@ -218,7 +181,9 @@
             <a href="https://wa.me/+34644053987" target="_blank" aria-label="Whatsapp"><img
                     src="imgs/WhatsAppButtonGreenLarge.svg" alt="Let's chat on WhatsApp" loading="lazy" /></a>
         </section>
-
+<img src="imgs/midsommar/PhotoBooth6.jpg" class="photo" />
+<h2 data-i18n="bye-bye">See you there!</h2>
+<br/>
     </main>
     <footer id="contact" class="Footer Section" aria-label="Contact information">
         <iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen
@@ -243,13 +208,8 @@
                             class="footerIcon icon-instagram"></span></a>
                     <a href="https://wa.me/+34644053987" target="_blank" aria-label="Whatsapp"><span
                             class="footerIcon icon-whatsapp"></span></a>
-                    <!-- <a href="https://telegram.com/wonderhouse" aria-label="Telegram"><span class="footerIcon icon-telegram"></span></a> -->
-                </div>
-                <!-- <div class="footer-links">
-                    <a href="/privacy-policy">Privacy Policy</a>
-                    <a href="/terms-conditions">Terms & Conditions</a>
-
-                </div> -->
+                               </div>
+              
             </div>
 
 
@@ -294,7 +254,8 @@
                 'address': 'Dirección:',
                 'address-text': 'Wonder House Coliving, Urbanitzacio Rio Park, 14, 17451 Sant Feliu de Buixalleu, Girona, España',
                 'follow-us': 'Síguenos',
-                'footer-signature': 'Hecho por alguien que preferiría estar en la hamaca ahora mismo. 2025'
+                'footer-signature': 'Hecho por alguien que preferiría estar en la hamaca ahora mismo. 2025',
+                'bye-bye': '¡Nos vemos allí!'
             },
             en: {
                 'title': 'Pagan Festival',
@@ -327,7 +288,8 @@
                 'address': 'Address:',
                 'address-text': 'Wonder House Coliving, Urbanitzacio Rio Park, 14, 17451 Sant Feliu de Buixalleu, Girona, Spain',
                 'follow-us': 'Follow Us',
-                'footer-signature': 'Made by someone that would rather be in the hammock right now. 2025'
+                'footer-signature': 'Made by someone that would rather be in the hammock right now. 2025',
+                'bye-bye': 'See you there!'
             },
             ca: {
                 'title': 'Festa pagana',
@@ -360,7 +322,8 @@
                 'address': 'Adreça:',
                 'address-text': 'Wonder House Coliving, Urbanitzacio Rio Park, 14, 17451 Sant Feliu de Buixalleu, Girona, Espanya',
                 'follow-us': 'Segueix-nos',
-                'footer-signature': 'Fet per algú que preferiria estar a l\'hamaca ara mateix. 2025'
+                'footer-signature': 'Fet per algú que preferiria estar a l\'hamaca ara mateix. 2025',
+                'bye-bye': 'Ens veiem allà!'
             }
         };
 
